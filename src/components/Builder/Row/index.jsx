@@ -4,7 +4,7 @@ import ItemList from "../ItemList";
 
 const Row = ({ index, section, ...props }) => (
   <Draggable draggableId={section.id} index={index}>
-    {(provided) => (
+    {(provided, snapshot) => (
       <div
         {...provided.draggableProps}
         {...provided.dragHandleProps}

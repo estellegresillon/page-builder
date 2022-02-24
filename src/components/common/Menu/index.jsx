@@ -1,36 +1,67 @@
-import { Link } from "react-router-dom";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 import { useBuilderContext } from "contexts";
-import { saveDocumentInLocalStorage } from "utils/localStorage";
+import React from "react";
 
-const Menu = () => {
-  const { addComponent, resetJson, components, json } = useBuilderContext();
+const Menu = ({ onClose }) => {
+  const { addComponent, components } = useBuilderContext();
 
   const onClick = (componentName) => {
     const { componentType } = components[componentName];
     addComponent({ componentName, componentType });
   };
 
-  const handleSaveDocument = () => {
-    saveDocumentInLocalStorage(json);
+  const handleOnDragEnd = (result) => {
+    console.log(result, "hiii");
+    if (!result.destion) {
+      return;
+    }
   };
 
   return (
     <MenuWrapper>
-      {Object.keys(components).map((component) => (
-        <div key={component} onClick={() => onClick(component)}>
-          {component}
-        </div>
-      ))}
-      <div onClick={() => handleSaveDocument()}>Save</div>
-      <div onClick={() => resetJson()}>Clean</div>
-      <div>
-        <Link to="/">Builder</Link>
-      </div>
-      <div>
-        <Link to="/prod">Prod</Link>
-      </div>
+      <div onClick={onClose}>close</div>
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <Droppable droppableId="menu">
+          {(provided) => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              {Object.keys(components).map((component, index) => (
+                <Draggable
+                  draggableId={component}
+                  index={index}
+                  key={component}
+                >
+                  {(provided, snapshot) => (
+                    <React.Fragment>
+                      <Item
+                        ref={provided.innerRef}
+                        onClick={() => onClick(component)}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={{
+                          ...provided.draggableProps.style,
+                          transform: snapshot.isDragging
+                            ? provided.draggableProps.style?.transform
+                            : "translate(0px, 0px)",
+                        }}
+                      >
+                        {component}
+                      </Item>
+                      {snapshot.isDragging && (
+                        <Item style={{ transform: "none !important" }}>
+                          {component}
+                        </Item>
+                      )}
+                    </React.Fragment>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </MenuWrapper>
   );
 };
@@ -38,13 +69,26 @@ const Menu = () => {
 export default Menu;
 
 const MenuWrapper = styled.div`
-  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 1px 66.5px 0 rgb(0 0 0 / 18%);
   display: flex;
-  height: 100%;
-  width: 100px;
+  flex-direction: column;
+  max-height: 500px;
+  position: absolute;
+  overflow: scroll;
+  top: 40px;
+  width: 250px;
+  z-index: 1;
+`;
 
-  div {
-    margin: 20px;
-    text-align: center;
+const Item = styled.div`
+  color: black;
+  margin: 5px;
+  padding: 30px;
+  text-align: center;
+
+  &:hover {
+    background-color: #e9e9e9;
   }
 `;

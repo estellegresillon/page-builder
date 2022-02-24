@@ -92,7 +92,6 @@ const Builder = () => {
                     />
                   );
                 })}
-
                 {provided.placeholder}
               </RowWrapper>
             )}
