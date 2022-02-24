@@ -35,14 +35,15 @@ const Builder = () => {
 
   return (
     <BuilderWrapper>
-      {json.length > 0 ? (
+      {json?.length > 0 ? (
         json.map((section) => {
           const Component = components[section.componentName];
+          console.log(section);
 
           return (
             <Component
               key={section.id}
-              $isSelected={section.id === selectedComponent.id}
+              $isSelected={section.id === selectedComponent?.id}
               item={section}
               onClick={(e) => handleClick(e, section)}
             >
@@ -52,7 +53,7 @@ const Builder = () => {
                 return (
                   <Component
                     key={single.id}
-                    $isSelected={single.id === selectedComponent.id}
+                    $isSelected={single.id === selectedComponent?.id}
                     item={single}
                     onClick={(e) => handleClick(e, single)}
                   />
