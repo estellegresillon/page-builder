@@ -34,11 +34,10 @@ const Builder = () => {
   }, [handleKeyDown]);
 
   return (
-    <BuilderWrapper>
+    <BuilderWrapper onClick={() => selectComponent()}>
       {json?.length > 0 ? (
         json.map((section) => {
           const Component = components[section.componentName];
-          console.log(section);
 
           return (
             <Component
