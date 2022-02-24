@@ -1,7 +1,10 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 import { useBuilderContext } from "contexts";
+
+import Row from "./Row";
 
 const Builder = () => {
   const {
@@ -10,7 +13,11 @@ const Builder = () => {
     removeComponent,
     selectComponent,
     selectedComponent,
+    updateDocument,
+    updateSingles,
   } = useBuilderContext();
+
+  const [sections, updateSections] = useState([]);
 
   const handleClick = (e, item) => {
     e.stopPropagation();
@@ -28,39 +35,69 @@ const Builder = () => {
     [removeComponent, selectedComponent]
   );
 
+  const handleOnDragEnd = (result) => {
+    if (
+      !result.destination ||
+      result.destination.droppableId !== result.source.droppableId
+    ) {
+      return;
+    }
+
+    if (result.type === "SINGLE") {
+      updateSingles(
+        result.destination.droppableId,
+        result.source.index,
+        result.destination.index
+      );
+    }
+
+    if (result.type === "SECTION") {
+      const items = [...sections];
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
+
+      updateSections(items);
+      updateDocument(items);
+    }
+  };
+
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
+  useEffect(() => {
+    updateSections(json);
+  }, [json]);
+
   return (
     <BuilderWrapper onClick={() => selectComponent()}>
-      {json?.length > 0 ? (
-        json.map((section) => {
-          const Component = components[section.componentName];
+      {sections?.length > 0 ? (
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="body" type="SECTION">
+            {(provided) => (
+              <RowWrapper {...provided.droppableProps} ref={provided.innerRef}>
+                {sections.map((section, index) => {
+                  const Component = components[section.componentName];
 
-          return (
-            <Component
-              key={section.id}
-              $isSelected={section.id === selectedComponent?.id}
-              item={section}
-              onClick={(e) => handleClick(e, section)}
-            >
-              {section.children.map((single) => {
-                const Component = components[single.componentName];
+                  return (
+                    <Row
+                      Component={Component}
+                      components={components}
+                      selectedComponent={selectedComponent}
+                      handleClick={handleClick}
+                      index={index}
+                      key={section.id}
+                      section={section}
+                    />
+                  );
+                })}
 
-                return (
-                  <Component
-                    key={single.id}
-                    $isSelected={single.id === selectedComponent?.id}
-                    item={single}
-                    onClick={(e) => handleClick(e, single)}
-                  />
-                );
-              })}
-            </Component>
-          );
-        })
+                {provided.placeholder}
+              </RowWrapper>
+            )}
+          </Droppable>
+        </DragDropContext>
       ) : (
         <div>Add your first element.</div>
       )}
@@ -77,4 +114,12 @@ const BuilderWrapper = styled.div`
   position: relative;
   flex-direction: column;
   width: 100%;
+`;
+
+const RowWrapper = styled.div`
+  width: 100%;
+
+  > div {
+    height: 200px;
+  }
 `;

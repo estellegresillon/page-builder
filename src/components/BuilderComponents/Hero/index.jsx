@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Hero = ({ children, ...props }) => (
+const Hero = ({ children, index, ...props }) => (
   <HeroWrapper {...props}>{children}</HeroWrapper>
 );
 
@@ -12,11 +12,13 @@ export default Hero;
 const HeroWrapper = styled.div`
   align-items: center;
   background-color: pink;
-  border: ${({ $isSelected }) =>
-    $isSelected ? "2px violet solid" : "1px solid black"};
+  box-shadow: ${({ $isSelected }) =>
+    $isSelected
+      ? "inset 0px 0px 0px 3px violet"
+      : "inset 0px 0px 0px 1px black"};
   display: flex;
-  flex-direction: column:
+  justify-content: center;
   position: relative;
-  height: 300px;
+  height: 200px;
   width: 100%;
 `;

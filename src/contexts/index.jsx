@@ -94,6 +94,29 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
     [json]
   );
 
+  const updateDocument = useCallback((json) => {
+    setJson(json);
+  }, []);
+
+  const updateSingles = useCallback(
+    (parentId, sourceIndex, destinationIndex) => {
+      const newJson = [...json];
+      const parent = newJson.filter((section) => section.id === parentId)[0];
+      const items = parent.children;
+      const [reorderedItem] = items.splice(sourceIndex, 1);
+      items.splice(destinationIndex, 0, reorderedItem);
+      parent.children = items;
+
+      const sectionIndex = newJson.findIndex(
+        (sections) => sections.id === parent.id
+      );
+      newJson[sectionIndex] = parent;
+
+      setJson(newJson);
+    },
+    [json]
+  );
+
   const resetJson = useCallback(() => {
     setJson([]);
   }, []);
@@ -107,6 +130,8 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       resetJson,
       selectComponent,
       selectedComponent,
+      updateDocument,
+      updateSingles,
     }),
     [
       addComponent,
@@ -116,6 +141,8 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       resetJson,
       selectComponent,
       selectedComponent,
+      updateDocument,
+      updateSingles,
     ]
   );
 

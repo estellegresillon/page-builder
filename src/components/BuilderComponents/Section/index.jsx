@@ -11,10 +11,11 @@ export default Section;
 
 const SectionWrapper = styled.div`
   align-items: center;
-  border: ${({ $isSelected }) =>
-    $isSelected ? "2px violet solid" : "1px solid black"};
+  box-shadow: ${({ $isSelected }) =>
+    $isSelected
+      ? "inset 0px 0px 0px 3px violet"
+      : "inset 0px 0px 0px 1px black"};
   display: flex;
-  flex-direction: column:
   position: relative;
   height: 400px;
   width: 100%;

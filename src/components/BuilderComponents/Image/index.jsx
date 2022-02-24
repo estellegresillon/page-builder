@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const Image = ({ image = "", ...props }) => (
-  <ImageWrapper {...props}>Image</ImageWrapper>
+const Image = ({ item, ...props }) => (
+  <ImageWrapper {...props}>{item.id}</ImageWrapper>
 );
 
 Image.componentName = "Image";
@@ -10,13 +10,15 @@ Image.componentType = "Single";
 export default Image;
 
 const ImageWrapper = styled.div`
-  align-items: center;
+  // align-items: center;
   background-color: red;
-  border: ${({ $isSelected }) =>
-    $isSelected ? "2px violet solid" : "1px solid black"};
-  display: flex;
-  flex-direction: column;
+  box-shadow: ${({ $isSelected }) =>
+    $isSelected
+      ? "inset 0px 0px 0px 3px violet"
+      : "inset 0px 0px 0px 1px black"};
+  /* display: flex;
+  flex-direction: column; */
   height: 100px;
-  position: relative;
-  width: 100%;
+  //position: relative;
+  width: 100px;
 `;
