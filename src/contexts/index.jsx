@@ -8,6 +8,7 @@ import {
 
 import { getComponents } from "utils/getBuilderComponents";
 import { createNewItem } from "utils/helpers";
+import { getDocumentFromLocalStorage } from "utils/localStorage";
 
 const BuilderContext = createContext({
   addComponent: () => {},
@@ -16,7 +17,7 @@ const BuilderContext = createContext({
 });
 
 export const BuilderProvider = ({ children, components = getComponents() }) => {
-  const [json, setJson] = useState([]);
+  const [json, setJson] = useState(getDocumentFromLocalStorage() || []);
   const [selectedComponent, setSelectedComponent] = useState(null);
 
   const selectComponent = useCallback((item) => {
@@ -25,7 +26,7 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
 
   const addComponent = useCallback(
     ({ componentName, componentType }) => {
-      const newChildren = createNewItem({
+      const newChild = createNewItem({
         componentName,
         componentType,
         attributes: {},
@@ -33,7 +34,7 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       });
 
       if (componentType === "Section") {
-        setJson((prevState) => [...prevState, newChildren]);
+        setJson((prevState) => [...prevState, newChild]);
       }
 
       if (componentType === "Single") {
@@ -49,9 +50,12 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
           (sections) => sections.id === selectedComponent.id
         );
 
+        const parentId = json[parentIndex].id;
+        newChild.parentId = parentId;
+
         let newJson = [...json];
         let parent = { ...newJson[parentIndex] };
-        parent.children = [...parent.children, newChildren];
+        parent.children = [...parent.children, newChild];
         newJson[parentIndex] = parent;
 
         setJson(newJson);
@@ -60,15 +64,59 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
     [json, selectedComponent]
   );
 
+  const removeComponent = useCallback(
+    (component) => {
+      if (component.componentType === "Section") {
+        const newJson = [...json].filter((section) => {
+          return section.id !== component.id;
+        });
+
+        setJson(newJson);
+      }
+
+      if (component.componentType === "Single") {
+        const parentIndex = json.findIndex(
+          (sections) => sections.id === component.parentId
+        );
+
+        const newJson = [...json];
+        let siblings = newJson[parentIndex].children;
+
+        const newSiblings = siblings.filter((single) => {
+          return single.id !== component.id;
+        });
+
+        newJson[parentIndex].children = newSiblings;
+
+        setJson(newJson);
+      }
+    },
+    [json]
+  );
+
+  const resetJson = useCallback(() => {
+    setJson([]);
+  }, []);
+
   const value = useMemo(
     () => ({
+      addComponent,
       components,
       json,
-      addComponent,
+      removeComponent,
+      resetJson,
       selectComponent,
       selectedComponent,
     }),
-    [addComponent, components, json, selectComponent, selectedComponent]
+    [
+      addComponent,
+      components,
+      json,
+      removeComponent,
+      resetJson,
+      selectComponent,
+      selectedComponent,
+    ]
   );
 
   return (

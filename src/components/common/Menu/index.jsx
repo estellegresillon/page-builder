@@ -5,7 +5,7 @@ import { useBuilderContext } from "contexts";
 import { saveDocumentInLocalStorage } from "utils/localStorage";
 
 const Menu = () => {
-  const { addComponent, components, json } = useBuilderContext();
+  const { addComponent, resetJson, components, json } = useBuilderContext();
 
   const onClick = (componentName) => {
     const { componentType } = components[componentName];
@@ -24,6 +24,10 @@ const Menu = () => {
         </div>
       ))}
       <div onClick={() => handleSaveDocument()}>Save</div>
+      <div onClick={() => resetJson()}>Clean</div>
+      <div>
+        <Link to="/">Builder</Link>
+      </div>
       <div>
         <Link to="/prod">Prod</Link>
       </div>

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { useBuilderContext } from "contexts";
+import { getComponents } from "utils/getBuilderComponents";
 import { getDocumentFromLocalStorage } from "utils/localStorage";
 
 const Prod = () => {
-  const { components } = useBuilderContext();
+  const components = getComponents();
   const [json, setJson] = useState([]);
 
   useEffect(() => {
@@ -15,19 +15,23 @@ const Prod = () => {
 
   return (
     <ProdWrapper>
-      {json.map((section) => {
-        const Component = components[section.componentName];
+      {json?.length !== 0 ? (
+        json.map((section) => {
+          const Section = components[section.componentName];
 
-        return (
-          <Component key={section.id} item={section}>
-            {section.children.map((single) => {
-              const Component = components[single.componentName];
+          return (
+            <Section item={section} key={section.id}>
+              {section.children.map((single) => {
+                const Single = components[single.componentName];
 
-              return <Component key={single.id} item={single} />;
-            })}
-          </Component>
-        );
-      })}
+                return <Single item={single} key={single.id} />;
+              })}
+            </Section>
+          );
+        })
+      ) : (
+        <div>Create your page in the page builder</div>
+      )}
     </ProdWrapper>
   );
 };
