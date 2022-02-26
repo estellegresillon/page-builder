@@ -14,13 +14,13 @@ const TopBar = () => {
   return (
     <TopBarWrapper>
       <div onClick={() => handleSaveDocument()}>Save</div>
-      <div onClick={() => resetJson()}>Clean</div>
       <div>
         <Link to="/">Builder</Link>
       </div>
       <div>
         <Link to="/prod">Prod</Link>
       </div>
+      <div onClick={() => resetJson()}>Clean</div>
     </TopBarWrapper>
   );
 };

@@ -130,7 +130,7 @@ const PlayGroundWrapper = styled.div`
   overflow: scroll;
   padding-bottom: 200px;
   position: relative;
-  width: calc(100vw - 150px);
+  width: calc(100vw - 250px);
 `;
 
 const RowWrapper = styled.div`

@@ -44,7 +44,7 @@ const Resize = ({ children, $isSelected, item, onClick }) => {
     <ResizeWrapper $isSelected={$isSelected} onClick={onClick}>
       {React.cloneElement(children, { ref })}
       {$isSelected && (
-        <BottomHandler
+        <Handler
           draggable="true"
           onDragStart={initial}
           onDrag={resize}
@@ -82,7 +82,7 @@ const ResizeWrapper = styled.div`
   }​
 `;
 
-const BottomHandler = styled.div`
+const Handler = styled.div`
   background-color: violet;
   bottom: -15px;
   cursor: row-resize;
