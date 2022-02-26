@@ -17,8 +17,11 @@ Hero.componentType = "Section";
 export default Hero;
 
 const HeroWrapper = styled.div`
+  align-items: center;
   background: blue;
   display: flex;
-  height: ${({ $attributes }) => $attributes.height || "200px"};
+  flex-direction: column;
+  justify-content: center;
+  min-height: ${({ $attributes }) => $attributes.height || "200px"};
   width: 100%;
 `;

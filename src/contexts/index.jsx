@@ -18,10 +18,15 @@ const BuilderContext = createContext({
 
 export const BuilderProvider = ({ children, components = getComponents() }) => {
   const [json, setJson] = useState(getDocumentFromLocalStorage() || []);
-  const [selectedComponent, setSelectedComponent] = useState(null);
+  const [selectedParentComponent, setSelectedParentComponent] = useState(null);
+  const [selectedSingleComponent, setSelectedSingleComponent] = useState(null);
 
-  const selectComponent = useCallback((item) => {
-    setSelectedComponent(item);
+  const selectParentComponent = useCallback((item) => {
+    setSelectedParentComponent(item);
+  }, []);
+
+  const selectSingleComponent = useCallback((item) => {
+    setSelectedSingleComponent(item);
   }, []);
 
   const addComponent = useCallback(
@@ -39,15 +44,15 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
 
       if (componentType === "Single") {
         if (
-          !selectedComponent ||
-          selectedComponent.componentType !== "Section"
+          !selectedParentComponent ||
+          selectedParentComponent.componentType !== "Section"
         ) {
           console.log("select a parent");
           return;
         }
 
         const parentIndex = json.findIndex(
-          (sections) => sections.id === selectedComponent.id
+          (sections) => sections.id === selectedParentComponent.id
         );
 
         const parentId = json[parentIndex].id;
@@ -61,7 +66,7 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
         setJson(newJson);
       }
     },
-    [json, selectedComponent]
+    [json, selectedParentComponent]
   );
 
   const removeComponent = useCallback(
@@ -142,8 +147,10 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       moveSingles,
       removeComponent,
       resetJson,
-      selectComponent,
-      selectedComponent,
+      selectParentComponent,
+      selectedParentComponent,
+      selectSingleComponent,
+      selectedSingleComponent,
       updateAttributes,
       updateDocument,
     }),
@@ -154,8 +161,10 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       moveSingles,
       removeComponent,
       resetJson,
-      selectComponent,
-      selectedComponent,
+      selectParentComponent,
+      selectedParentComponent,
+      selectSingleComponent,
+      selectedSingleComponent,
       updateAttributes,
       updateDocument,
     ]

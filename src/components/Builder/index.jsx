@@ -12,17 +12,25 @@ const Builder = () => {
     components,
     json,
     removeComponent,
-    selectComponent,
-    selectedComponent,
+    selectParentComponent,
+    selectedParentComponent,
+    selectSingleComponent,
+    selectedSingleComponent,
     updateDocument,
     moveSingles,
   } = useBuilderContext();
 
   const [sections, moveSections] = useState([]);
 
-  const handleClick = (e, item) => {
+  const handleParentClick = (e, item) => {
+    selectParentComponent(item);
+    selectSingleComponent(null);
+  };
+
+  const handleSingleClick = (e, item, parent) => {
     e.stopPropagation();
-    selectComponent(item);
+    selectSingleComponent(item);
+    selectParentComponent(parent);
   };
 
   const handleKeyDown = useCallback(
@@ -30,10 +38,17 @@ const Builder = () => {
       const key = e.key;
 
       if (key === "Backspace") {
+        if (!selectedParentComponent && !selectedSingleComponent) {
+          return null;
+        }
+
+        const selectedComponent =
+          selectedSingleComponent || selectedParentComponent;
+
         removeComponent(selectedComponent);
       }
     },
-    [removeComponent, selectedComponent]
+    [removeComponent, selectedParentComponent, selectedSingleComponent]
   );
 
   const handleOnDragEnd = (result) => {
@@ -69,7 +84,7 @@ const Builder = () => {
   }, [json]);
 
   return (
-    <BuilderWrapper onClick={() => selectComponent()}>
+    <BuilderWrapper>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Menu onDragEnd={handleOnDragEnd} />
         <PlayGroundWrapper>
@@ -86,14 +101,16 @@ const Builder = () => {
                     return (
                       <div
                         key={section.id}
-                        style={{ height: section.attributes.height }}
+                        style={{ minHeight: section.attributes.height }}
                       >
                         <Row
                           Component={Component}
                           components={components}
-                          selectedComponent={selectedComponent}
-                          handleClick={handleClick}
+                          handleParentClick={handleParentClick}
+                          handleSingleClick={handleSingleClick}
                           index={index}
+                          selectedParentComponent={selectedParentComponent}
+                          selectedSingleComponent={selectedSingleComponent}
                           section={section}
                         />
                       </div>

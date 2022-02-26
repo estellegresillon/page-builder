@@ -13,6 +13,5 @@ const ImageWrapper = styled.div`
   background-color: red;
   box-shadow: ${({ $isSelected }) =>
     $isSelected ? "inset 0px 0px 0px 3px violet" : "none"};
-  height: 50%;
-  width: 50%;
+  height: 150px;
 `;

@@ -3,17 +3,19 @@ import Resize from "components/common/Resize";
 const ItemList = ({
   Component,
   components,
-  handleClick,
+  handleParentClick,
+  handleSingleClick,
   section,
-  selectedComponent,
+  selectedParentComponent,
+  selectedSingleComponent,
 }) => (
   <Resize
-    $isSelected={section.id === selectedComponent?.id}
+    $isSelected={section.id === selectedParentComponent?.id}
     item={section}
-    onClick={(e) => handleClick(e, section)}
+    onClick={(e) => handleParentClick(e, section)}
   >
     <Component
-      $isSelected={section.id === selectedComponent?.id}
+      $isSelected={section.id === selectedParentComponent?.id}
       item={section}
     >
       {section.children.map((single) => {
@@ -21,10 +23,10 @@ const ItemList = ({
 
         return (
           <ChildrenComponent
-            $isSelected={single.id === selectedComponent?.id}
+            $isSelected={single.id === selectedSingleComponent?.id}
             item={single}
             key={single.id}
-            onClick={(e) => handleClick(e, single)}
+            onClick={(e) => handleSingleClick(e, single, section)}
           />
         );
       })}
