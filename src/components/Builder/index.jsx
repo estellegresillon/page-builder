@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
+import Menu from "components/common/Menu";
 import { useBuilderContext } from "contexts";
 
 import Row from "./Row";
@@ -14,10 +15,10 @@ const Builder = () => {
     selectComponent,
     selectedComponent,
     updateDocument,
-    updateSingles,
+    moveSingles,
   } = useBuilderContext();
 
-  const [sections, updateSections] = useState([]);
+  const [sections, moveSections] = useState([]);
 
   const handleClick = (e, item) => {
     e.stopPropagation();
@@ -36,15 +37,12 @@ const Builder = () => {
   );
 
   const handleOnDragEnd = (result) => {
-    if (
-      !result.destination ||
-      result.destination.droppableId !== result.source.droppableId
-    ) {
+    if (!result.destination) {
       return;
     }
 
     if (result.type === "SINGLE") {
-      updateSingles(
+      moveSingles(
         result.destination.droppableId,
         result.source.index,
         result.destination.index
@@ -56,7 +54,7 @@ const Builder = () => {
       const [reorderedItem] = items.splice(result.source.index, 1);
       items.splice(result.destination.index, 0, reorderedItem);
 
-      updateSections(items);
+      moveSections(items);
       updateDocument(items);
     }
   };
@@ -67,39 +65,49 @@ const Builder = () => {
   }, [handleKeyDown]);
 
   useEffect(() => {
-    updateSections(json);
+    moveSections(json);
   }, [json]);
 
   return (
     <BuilderWrapper onClick={() => selectComponent()}>
-      {sections?.length > 0 ? (
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="body" type="SECTION">
-            {(provided) => (
-              <RowWrapper {...provided.droppableProps} ref={provided.innerRef}>
-                {sections.map((section, index) => {
-                  const Component = components[section.componentName];
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <Menu onDragEnd={handleOnDragEnd} />
+        <PlayGroundWrapper>
+          {sections?.length > 0 ? (
+            <Droppable droppableId="body" type="SECTION">
+              {(provided) => (
+                <RowWrapper
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {sections.map((section, index) => {
+                    const Component = components[section.componentName];
 
-                  return (
-                    <Row
-                      Component={Component}
-                      components={components}
-                      selectedComponent={selectedComponent}
-                      handleClick={handleClick}
-                      index={index}
-                      key={section.id}
-                      section={section}
-                    />
-                  );
-                })}
-                {provided.placeholder}
-              </RowWrapper>
-            )}
-          </Droppable>
-        </DragDropContext>
-      ) : (
-        <div>Add your first element.</div>
-      )}
+                    return (
+                      <div
+                        key={section.id}
+                        style={{ height: section.attributes.height }}
+                      >
+                        <Row
+                          Component={Component}
+                          components={components}
+                          selectedComponent={selectedComponent}
+                          handleClick={handleClick}
+                          index={index}
+                          section={section}
+                        />
+                      </div>
+                    );
+                  })}
+                  {provided.placeholder}
+                </RowWrapper>
+              )}
+            </Droppable>
+          ) : (
+            <div>Add your first element.</div>
+          )}
+        </PlayGroundWrapper>
+      </DragDropContext>
     </BuilderWrapper>
   );
 };
@@ -109,16 +117,22 @@ export default Builder;
 const BuilderWrapper = styled.div`
   align-items: center;
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - 260px);
   position: relative;
-  flex-direction: column;
   width: 100%;
+`;
+
+const PlayGroundWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 260px);
+  overflow: scroll;
+  padding-bottom: 200px;
+  position: relative;
+  width: calc(100vw - 150px);
 `;
 
 const RowWrapper = styled.div`
   width: 100%;
-
-  > div {
-    height: 200px;
-  }
 `;

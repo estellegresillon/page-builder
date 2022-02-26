@@ -1,8 +1,15 @@
+import { forwardRef } from "react";
 import styled from "styled-components";
 
-const Hero = ({ children, index, ...props }) => (
-  <HeroWrapper {...props}>{children}</HeroWrapper>
-);
+const Hero = forwardRef(({ children, item }, ref) => {
+  const { attributes } = item;
+
+  return (
+    <HeroWrapper $attributes={attributes} ref={ref}>
+      {children}
+    </HeroWrapper>
+  );
+});
 
 Hero.componentName = "Hero";
 Hero.componentType = "Section";
@@ -10,15 +17,8 @@ Hero.componentType = "Section";
 export default Hero;
 
 const HeroWrapper = styled.div`
-  align-items: center;
-  background-color: pink;
-  box-shadow: ${({ $isSelected }) =>
-    $isSelected
-      ? "inset 0px 0px 0px 3px violet"
-      : "inset 0px 0px 0px 1px black"};
+  background: blue;
   display: flex;
-  justify-content: center;
-  position: relative;
-  height: 200px;
+  height: ${({ $attributes }) => $attributes.height || "200px"};
   width: 100%;
 `;

@@ -98,7 +98,7 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
     setJson(json);
   }, []);
 
-  const updateSingles = useCallback(
+  const moveSingles = useCallback(
     (parentId, sourceIndex, destinationIndex) => {
       const newJson = [...json];
       const parent = newJson.filter((section) => section.id === parentId)[0];
@@ -117,6 +117,19 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
     [json]
   );
 
+  const updateAttributes = useCallback(
+    (sectionId, attributes) => {
+      const newJson = [...json];
+      const component = newJson.filter((section) => {
+        return section.id === sectionId;
+      });
+
+      component[0].attributes = attributes;
+      setJson(newJson);
+    },
+    [json]
+  );
+
   const resetJson = useCallback(() => {
     setJson([]);
   }, []);
@@ -126,23 +139,25 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       addComponent,
       components,
       json,
+      moveSingles,
       removeComponent,
       resetJson,
       selectComponent,
       selectedComponent,
+      updateAttributes,
       updateDocument,
-      updateSingles,
     }),
     [
       addComponent,
       components,
       json,
+      moveSingles,
       removeComponent,
       resetJson,
       selectComponent,
       selectedComponent,
+      updateAttributes,
       updateDocument,
-      updateSingles,
     ]
   );
 

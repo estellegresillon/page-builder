@@ -1,5 +1,7 @@
 import { Droppable } from "react-beautiful-dnd";
 
+import Resize from "components/common/Resize";
+
 import Item from "../Item";
 
 const ItemList = ({
@@ -9,31 +11,35 @@ const ItemList = ({
   section,
   selectedComponent,
 }) => (
-  <Droppable droppableId={section.id} type="SINGLE">
+  <Droppable droppableId={section.id} type="SINGLE" direction="horizontal">
     {(provided, snpashot) => (
       <div {...provided.droppableProps} ref={provided.innerRef}>
-        <Component
-          $isDragging={snpashot.isDragging}
+        <Resize
           $isSelected={section.id === selectedComponent?.id}
-          index={section.id}
           item={section}
           onClick={(e) => handleClick(e, section)}
         >
-          {section.children.map((single, index) => {
-            const Component = components[single.componentName];
+          <Component
+            $isDragging={snpashot.isDragging}
+            $isSelected={section.id === selectedComponent?.id}
+            item={section}
+          >
+            {section.children.map((single, index) => {
+              const ChildrenComponent = components[single.componentName];
 
-            return (
-              <Item
-                Component={Component}
-                handleClick={handleClick}
-                index={index}
-                key={single.id}
-                single={single}
-                selectedComponent={selectedComponent}
-              />
-            );
-          })}
-        </Component>
+              return (
+                <Item
+                  Component={ChildrenComponent}
+                  handleClick={handleClick}
+                  index={index}
+                  key={single.id}
+                  single={single}
+                  selectedComponent={selectedComponent}
+                />
+              );
+            })}
+          </Component>
+        </Resize>
         {provided.placeholder}
       </div>
     )}

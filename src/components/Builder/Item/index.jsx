@@ -1,28 +1,39 @@
 import { Draggable } from "react-beautiful-dnd";
+import styled from "styled-components";
 
-const ItemList = ({
-  Component,
-  handleClick,
-  index,
-  selectedComponent,
-  single,
-}) => (
-  <Draggable draggableId={single.id} index={index}>
-    {(provided) => (
-      <div
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        ref={provided.innerRef}
-      >
-        <Component
-          $isSelected={single.id === selectedComponent?.id}
-          item={single}
-          index={index}
-          onClick={(e) => handleClick(e, single)}
-        />
-      </div>
-    )}
-  </Draggable>
+const Item = ({ Component, handleClick, index, selectedComponent, single }) => (
+  <ItemWrapper>
+    <Draggable
+      isDragDisabled={selectedComponent?.id !== single.id}
+      draggableId={single.id}
+      index={index}
+    >
+      {(provided) => (
+        <div
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          <Component
+            $isSelected={single.id === selectedComponent?.id}
+            item={single}
+            onClick={(e) => handleClick(e, single)}
+          />
+        </div>
+      )}
+    </Draggable>
+  </ItemWrapper>
 );
 
-export default ItemList;
+const ItemWrapper = styled.div`
+  width: 50%;
+
+  > div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+export default Item;

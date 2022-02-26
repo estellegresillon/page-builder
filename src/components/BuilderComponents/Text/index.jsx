@@ -13,12 +13,9 @@ const TextWrapper = styled.div`
   align-items: center;
   background-color: blue;
   box-shadow: ${({ $isSelected }) =>
-    $isSelected
-      ? "inset 0px 0px 0px 3px violet"
-      : "inset 0px 0px 0px 1px black"};
+    $isSelected ? "inset 0px 0px 0px 3px violet" : "none"};
   display: flex;
   flex-direction: column;
-  height: 100px;
-  position: relative;
-  width: 100%;
+  height: 50%;
+  width: 50%;
 `;
