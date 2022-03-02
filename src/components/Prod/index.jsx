@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import Empty from "components/common/Empty";
 import { getComponents } from "utils/getBuilderComponents";
 import { getDocumentFromLocalStorage } from "utils/localStorage";
 
@@ -30,7 +31,7 @@ const Prod = () => {
           );
         })
       ) : (
-        <div>Create your page in the page builder</div>
+        <Empty text="Create your page in the page builder." />
       )}
     </ProdWrapper>
   );
@@ -41,7 +42,7 @@ export default Prod;
 const ProdWrapper = styled.div`
   align-items: center;
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
   position: relative;
   flex-direction: column;
   width: 100%;

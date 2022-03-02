@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
+import Empty from "components/common/Empty";
 import Menu from "components/common/Menu";
 import { useBuilderContext } from "contexts";
 import { createNewItem } from "utils/helpers";
@@ -124,7 +125,7 @@ const Builder = () => {
               )}
             </Droppable>
           ) : (
-            <div>Add your first element.</div>
+            <Empty text="Add your first element." />
           )}
         </PlayGroundWrapper>
       </DragDropContext>
@@ -146,7 +147,7 @@ const PlayGroundWrapper = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 260px);
+  height: calc(100vh - 270px);
   overflow: scroll;
   padding-bottom: 200px;
   position: relative;

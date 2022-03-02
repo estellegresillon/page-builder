@@ -30,12 +30,12 @@ export default Menu;
 
 const MenuWrapper = styled.div`
   background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 1px 66.5px 0 rgb(0 0 0 / 18%);
+  box-shadow: 0 1px 30px 0 rgb(0 0 0 / 20%);
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 70px);
   width: 250px;
+  z-index: 1;
 `;
 
 const Item = styled.div`
