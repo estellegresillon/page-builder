@@ -84,6 +84,12 @@ const Builder = () => {
     updateDocument(items);
   };
 
+  const handleBgClick = (e) => {
+    if (!e.target.id) {
+      selectComponent(null);
+    }
+  };
+
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
@@ -93,10 +99,8 @@ const Builder = () => {
     moveSections(json);
   }, [json]);
 
-  console.log(sections, "sections");
-
   return (
-    <BuilderWrapper>
+    <BuilderWrapper onClick={handleBgClick}>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Sidebar />
         <PlayGroundWrapper onDragOver={onDragOver} onDrop={onDrop}>

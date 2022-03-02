@@ -17,6 +17,7 @@ const BuilderContext = createContext({
 export const BuilderProvider = ({ children, components = getComponents() }) => {
   const [json, setJson] = useState(getDocumentFromLocalStorage() || []);
   const [selectedComponent, setSelectedComponent] = useState(null);
+  const [draggedComponent, setDraggedComponent] = useState(null);
 
   const selectComponent = useCallback((item) => {
     setSelectedComponent(item);
@@ -29,6 +30,7 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       });
 
       setJson(newJson);
+      setSelectedComponent(null);
     },
     [json]
   );
@@ -57,21 +59,25 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
   const value = useMemo(
     () => ({
       components,
+      draggedComponent,
       json,
       removeComponent,
       resetJson,
       selectComponent,
       selectedComponent,
+      setDraggedComponent,
       updateAttributes,
       updateDocument,
     }),
     [
       components,
+      draggedComponent,
       json,
       removeComponent,
       resetJson,
       selectComponent,
       selectedComponent,
+      setDraggedComponent,
       updateAttributes,
       updateDocument,
     ]

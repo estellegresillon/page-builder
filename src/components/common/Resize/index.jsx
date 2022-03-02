@@ -4,7 +4,12 @@ import styled from "styled-components";
 import { useBuilderContext } from "contexts";
 
 const Resize = ({ Children, $isSelected, item, onClick }) => {
-  const { updateAttributes } = useBuilderContext();
+  const {
+    draggedComponent,
+    selectedComponent,
+    setDraggedComponent,
+    updateAttributes,
+  } = useBuilderContext();
   const [initialPos, setInitialPos] = useState(null);
   const [initialSize, setInitialSize] = useState(null);
   const [img, setImg] = useState(null);
@@ -32,6 +37,13 @@ const Resize = ({ Children, $isSelected, item, onClick }) => {
     });
   };
 
+  const handleDragOver = (e) => {
+    if (!selectedComponent) {
+      const selectedItem = e.target;
+      setDraggedComponent(selectedItem.id);
+    }
+  };
+
   useEffect(() => {
     const dragImg = new Image(0, 0);
     dragImg.src =
@@ -41,7 +53,13 @@ const Resize = ({ Children, $isSelected, item, onClick }) => {
   }, []);
 
   return (
-    <ResizeWrapper $isSelected={$isSelected} onClick={onClick}>
+    <ResizeWrapper
+      $isSelected={$isSelected}
+      onDragOver={(e) => handleDragOver(e)}
+      onDrop={() => setDraggedComponent(null)}
+      onDragLeave={() => setDraggedComponent(null)}
+      onClick={onClick}
+    >
       <Children resizeRef={ref} item={item} />
       {$isSelected && (
         <Handler
@@ -51,6 +69,7 @@ const Resize = ({ Children, $isSelected, item, onClick }) => {
           onDragEnd={onDragEnd}
         />
       )}
+      {draggedComponent === item.id && <PlaceholderWrapper />}
     </ResizeWrapper>
   );
 };
@@ -67,6 +86,10 @@ const ResizeWrapper = styled.div`
   height: 100%;
   width: 100%;
   z-index: ${({ $isSelected }) => ($isSelected ? "1" : "0")};
+
+  .drag-sort-active {
+    margin-top: 1000px;
+  }
 
   &:before {
     box-shadow: ${({ $isSelected }) =>
@@ -89,4 +112,13 @@ const Handler = styled.div`
   height: 16px;
   position: absolute;
   width: 16px;
+`;
+
+const PlaceholderWrapper = styled.div`
+  background: #e8f4ff;
+  border: 1px solid #5ed2ff;
+  border-radius: 5px;
+  height: 200px;
+  margin: 5px;
+  width: calc(100% - 12px);
 `;
