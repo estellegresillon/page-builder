@@ -7,8 +7,7 @@ const Menu = () => {
   const { addComponent, components } = useBuilderContext();
 
   const onClick = (componentName) => {
-    const { componentType } = components[componentName];
-    addComponent({ componentName, componentType });
+    addComponent({ componentName });
   };
 
   return (

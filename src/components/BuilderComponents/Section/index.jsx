@@ -12,7 +12,6 @@ const Section = forwardRef(({ children, item }, ref) => {
 });
 
 Section.componentName = "Section";
-Section.componentType = "Section";
 
 export default Section;
 

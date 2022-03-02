@@ -12,56 +12,31 @@ const Builder = () => {
     components,
     json,
     removeComponent,
-    selectParentComponent,
-    selectedParentComponent,
-    selectSingleComponent,
-    selectedSingleComponent,
+    selectComponent,
+    selectedComponent,
     updateDocument,
-    moveSingles,
   } = useBuilderContext();
 
   const [sections, moveSections] = useState([]);
-
-  const handleParentClick = (e, item) => {
-    selectParentComponent(item);
-    selectSingleComponent(null);
-  };
-
-  const handleSingleClick = (e, item, parent) => {
-    e.stopPropagation();
-    selectSingleComponent(item);
-    selectParentComponent(parent);
-  };
 
   const handleKeyDown = useCallback(
     (e) => {
       const key = e.key;
 
       if (key === "Backspace") {
-        if (!selectedParentComponent && !selectedSingleComponent) {
+        if (!selectedComponent) {
           return null;
         }
-
-        const selectedComponent =
-          selectedSingleComponent || selectedParentComponent;
 
         removeComponent(selectedComponent);
       }
     },
-    [removeComponent, selectedParentComponent, selectedSingleComponent]
+    [removeComponent, selectedComponent]
   );
 
   const handleOnDragEnd = (result) => {
     if (!result.destination) {
       return;
-    }
-
-    if (result.type === "SINGLE") {
-      moveSingles(
-        result.destination.droppableId,
-        result.source.index,
-        result.destination.index
-      );
     }
 
     if (result.type === "SECTION") {
@@ -106,11 +81,9 @@ const Builder = () => {
                         <Row
                           Component={Component}
                           components={components}
-                          handleParentClick={handleParentClick}
-                          handleSingleClick={handleSingleClick}
+                          handleClick={() => selectComponent(section)}
                           index={index}
-                          selectedParentComponent={selectedParentComponent}
-                          selectedSingleComponent={selectedSingleComponent}
+                          selectedComponent={selectedComponent}
                           section={section}
                         />
                       </div>

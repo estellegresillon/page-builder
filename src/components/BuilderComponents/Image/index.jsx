@@ -5,7 +5,6 @@ const Image = ({ item, ...props }) => (
 );
 
 Image.componentName = "Image";
-Image.componentType = "Single";
 
 export default Image;
 

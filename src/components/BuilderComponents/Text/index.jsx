@@ -5,7 +5,6 @@ const Text = ({ text = "Hello", ...props }) => (
 );
 
 Text.componentName = "Text";
-Text.componentType = "Single";
 
 export default Text;
 

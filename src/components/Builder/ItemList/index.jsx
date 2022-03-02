@@ -1,36 +1,15 @@
 import Resize from "components/common/Resize";
 
-const ItemList = ({
-  Component,
-  components,
-  handleParentClick,
-  handleSingleClick,
-  section,
-  selectedParentComponent,
-  selectedSingleComponent,
-}) => (
+const ItemList = ({ Component, handleClick, section, selectedComponent }) => (
   <Resize
-    $isSelected={section.id === selectedParentComponent?.id}
+    $isSelected={section.id === selectedComponent?.id}
     item={section}
-    onClick={(e) => handleParentClick(e, section)}
+    onClick={handleClick}
   >
     <Component
-      $isSelected={section.id === selectedParentComponent?.id}
+      $isSelected={section.id === selectedComponent?.id}
       item={section}
-    >
-      {section.children.map((single) => {
-        const ChildrenComponent = components[single.componentName];
-
-        return (
-          <ChildrenComponent
-            $isSelected={single.id === selectedSingleComponent?.id}
-            item={single}
-            key={single.id}
-            onClick={(e) => handleSingleClick(e, single, section)}
-          />
-        );
-      })}
-    </Component>
+    />
   </Resize>
 );
 

@@ -12,7 +12,6 @@ const Hero = forwardRef(({ children, item }, ref) => {
 });
 
 Hero.componentName = "Hero";
-Hero.componentType = "Section";
 
 export default Hero;
 
