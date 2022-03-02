@@ -4,16 +4,21 @@ import { useBuilderContext } from "contexts";
 import React from "react";
 
 const Menu = () => {
-  const { addComponent, components } = useBuilderContext();
+  const { components } = useBuilderContext();
 
-  const onClick = (componentName) => {
-    addComponent({ componentName });
+  const onDragStart = (event, componentName) => {
+    event.dataTransfer.setData("application/builder", componentName);
+    event.dataTransfer.effectAllowed = "move";
   };
 
   return (
     <MenuWrapper>
       {Object.keys(components).map((component) => (
-        <Item key={component} onClick={() => onClick(component)}>
+        <Item
+          draggable
+          key={component}
+          onDragStart={(event) => onDragStart(event, component)}
+        >
           {component}
         </Item>
       ))}

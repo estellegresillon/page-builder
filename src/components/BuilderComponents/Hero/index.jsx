@@ -5,7 +5,7 @@ const Hero = forwardRef(({ children, item }, ref) => {
   const { attributes } = item;
 
   return (
-    <HeroWrapper $attributes={attributes} ref={ref}>
+    <HeroWrapper $attributes={attributes} id={item.id} ref={ref}>
       {children}
     </HeroWrapper>
   );

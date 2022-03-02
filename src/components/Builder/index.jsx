@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import Menu from "components/common/Menu";
 import { useBuilderContext } from "contexts";
+import { createNewItem } from "utils/helpers";
 
 import Row from "./Row";
 
@@ -49,6 +50,35 @@ const Builder = () => {
     }
   };
 
+  const onDragOver = (event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+  };
+
+  const onDrop = (event) => {
+    event.preventDefault();
+
+    const componentName = event.dataTransfer.getData("application/builder");
+
+    const dropEl = event.target;
+    const items = [...sections];
+    const index = items.findIndex((section) => section.id === dropEl.id);
+
+    const newChild = createNewItem({
+      componentName,
+      attributes: {},
+      children: [],
+    });
+
+    if (index >= 0) {
+      items.splice(index + 1, 0, newChild);
+    } else {
+      items.push(newChild);
+    }
+
+    updateDocument(items);
+  };
+
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
@@ -61,8 +91,8 @@ const Builder = () => {
   return (
     <BuilderWrapper>
       <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Menu onDragEnd={handleOnDragEnd} />
-        <PlayGroundWrapper>
+        <Menu />
+        <PlayGroundWrapper onDragOver={onDragOver} onDrop={onDrop}>
           {sections?.length > 0 ? (
             <Droppable droppableId="body" type="SECTION">
               {(provided) => (
@@ -125,4 +155,10 @@ const PlayGroundWrapper = styled.div`
 
 const RowWrapper = styled.div`
   width: 100%;
+
+  .placeholder {
+    background: pink;
+    width: 100%;
+    height: 100px;
+  }
 `;
