@@ -18,6 +18,10 @@ const Prod = () => {
     <ProdWrapper>
       {json?.length !== 0 ? (
         json.map((section) => {
+          if (!section?.componentName) {
+            return null;
+          }
+
           const Section = components[section.componentName];
 
           return (

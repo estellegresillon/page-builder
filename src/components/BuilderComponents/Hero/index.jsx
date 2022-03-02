@@ -1,15 +1,14 @@
-import { forwardRef } from "react";
 import styled from "styled-components";
 
-const Hero = forwardRef(({ children, item }, ref) => {
+const Hero = ({ item, resizeRef }) => {
   const { attributes } = item;
 
   return (
-    <HeroWrapper $attributes={attributes} id={item.id} ref={ref}>
-      {children}
+    <HeroWrapper $attributes={attributes} id={item.id} ref={resizeRef}>
+      hi
     </HeroWrapper>
   );
-});
+};
 
 Hero.componentName = "Hero";
 

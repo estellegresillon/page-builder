@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { useBuilderContext } from "contexts";
 
-const Resize = ({ children, $isSelected, item, onClick }) => {
+const Resize = ({ Children, $isSelected, item, onClick }) => {
   const { updateAttributes } = useBuilderContext();
   const [initialPos, setInitialPos] = useState(null);
   const [initialSize, setInitialSize] = useState(null);
@@ -42,7 +42,7 @@ const Resize = ({ children, $isSelected, item, onClick }) => {
 
   return (
     <ResizeWrapper $isSelected={$isSelected} onClick={onClick}>
-      {React.cloneElement(children, { ref })}
+      <Children resizeRef={ref} item={item} />
       {$isSelected && (
         <Handler
           draggable="true"

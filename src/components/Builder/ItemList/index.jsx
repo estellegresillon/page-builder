@@ -5,12 +5,8 @@ const ItemList = ({ Component, handleClick, section, selectedComponent }) => (
     $isSelected={section.id === selectedComponent?.id}
     item={section}
     onClick={handleClick}
-  >
-    <Component
-      $isSelected={section.id === selectedComponent?.id}
-      item={section}
-    />
-  </Resize>
+    Children={Component}
+  ></Resize>
 );
 
 export default ItemList;

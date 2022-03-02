@@ -1,15 +1,14 @@
-import { forwardRef } from "react";
 import styled from "styled-components";
 
-const Section = forwardRef(({ children, item }, ref) => {
+const Section = ({ item, resizeRef }) => {
   const { attributes } = item;
 
   return (
-    <SectionWrapper $attributes={attributes} ref={ref}>
-      {children}
+    <SectionWrapper $attributes={attributes} id={item.id} ref={resizeRef}>
+      ho
     </SectionWrapper>
   );
-});
+};
 
 Section.componentName = "Section";
 

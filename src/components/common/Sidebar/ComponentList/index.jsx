@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 import { useBuilderContext } from "contexts";
-import React from "react";
 
-const Menu = () => {
+const ComponentList = () => {
   const { components } = useBuilderContext();
 
   const onDragStart = (event, componentName) => {
@@ -11,31 +10,27 @@ const Menu = () => {
     event.dataTransfer.effectAllowed = "move";
   };
 
-  return (
-    <MenuWrapper>
+  return components ? (
+    <ListWrapper>
       {Object.keys(components).map((component) => (
         <Item
           draggable
           key={component}
-          onDragStart={(event) => onDragStart(event, component)}
+          onDragStart={(e) => onDragStart(e, component)}
         >
           {component}
         </Item>
       ))}
-    </MenuWrapper>
-  );
+    </ListWrapper>
+  ) : null;
 };
 
-export default Menu;
+export default ComponentList;
 
-const MenuWrapper = styled.div`
-  background-color: white;
-  box-shadow: 0 1px 30px 0 rgb(0 0 0 / 20%);
+const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 70px);
-  width: 250px;
-  z-index: 1;
+  width: 100%;
 `;
 
 const Item = styled.div`

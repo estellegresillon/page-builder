@@ -3,7 +3,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 import Empty from "components/common/Empty";
-import Menu from "components/common/Menu";
+import Sidebar from "components/common/Sidebar";
 import { useBuilderContext } from "contexts";
 import { createNewItem } from "utils/helpers";
 
@@ -61,6 +61,10 @@ const Builder = () => {
 
     const componentName = event.dataTransfer.getData("application/builder");
 
+    if (!componentName) {
+      return null;
+    }
+
     const dropEl = event.target;
     const items = [...sections];
     const index = items.findIndex((section) => section.id === dropEl.id);
@@ -89,10 +93,12 @@ const Builder = () => {
     moveSections(json);
   }, [json]);
 
+  console.log(sections, "sections");
+
   return (
     <BuilderWrapper>
       <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Menu />
+        <Sidebar />
         <PlayGroundWrapper onDragOver={onDragOver} onDrop={onDrop}>
           {sections?.length > 0 ? (
             <Droppable droppableId="body" type="SECTION">
@@ -102,6 +108,10 @@ const Builder = () => {
                   ref={provided.innerRef}
                 >
                   {sections.map((section, index) => {
+                    if (!section?.componentName) {
+                      return null;
+                    }
+
                     const Component = components[section.componentName];
 
                     return (
@@ -151,7 +161,7 @@ const PlayGroundWrapper = styled.div`
   overflow: scroll;
   padding-bottom: 200px;
   position: relative;
-  width: calc(100vw - 250px);
+  width: calc(100vw - 300px);
 `;
 
 const RowWrapper = styled.div`
