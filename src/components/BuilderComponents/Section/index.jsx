@@ -19,7 +19,7 @@ const SectionWrapper = styled.div`
   background: red;
   display: flex;
   flex-wrap: wrap;
-  min-height: ${({ $attributes }) => $attributes.height || "300px"};
+  min-height: ${({ $attributes }) => `${$attributes.height}px`};
   justify-content: space-evenly;
   width: 100%;
 `;

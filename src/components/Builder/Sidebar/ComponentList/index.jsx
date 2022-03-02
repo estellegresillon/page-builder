@@ -5,8 +5,8 @@ import { useBuilderContext } from "contexts";
 const ComponentList = () => {
   const { components } = useBuilderContext();
 
-  const onDragStart = (event, componentName) => {
-    event.dataTransfer.setData("application/builder", componentName);
+  const onDragStart = (event, component) => {
+    event.dataTransfer.setData("builder/name", component.componentName);
     event.dataTransfer.effectAllowed = "move";
   };
 
@@ -16,7 +16,7 @@ const ComponentList = () => {
         <Item
           draggable
           key={component}
-          onDragStart={(e) => onDragStart(e, component)}
+          onDragStart={(e) => onDragStart(e, components[component])}
         >
           {component}
         </Item>

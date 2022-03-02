@@ -54,6 +54,7 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
 
   const resetJson = useCallback(() => {
     setJson([]);
+    setSelectedComponent(null);
   }, []);
 
   const value = useMemo(

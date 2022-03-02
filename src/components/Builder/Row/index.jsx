@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 
-import ItemList from "../ItemList";
+import ItemList from "./ItemList";
 
 const Row = ({ index, section, ...props }) => {
   const [isDragDisabled, setIsDragDisabled] = useState(false);

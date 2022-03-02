@@ -46,7 +46,7 @@ export default Prod;
 const ProdWrapper = styled.div`
   align-items: center;
   display: flex;
-  min-height: calc(100vh - 70px);
+  min-height: 100vh;
   position: relative;
   flex-direction: column;
   width: 100%;

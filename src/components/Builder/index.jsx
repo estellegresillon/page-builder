@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 import Empty from "components/common/Empty";
-import Sidebar from "components/common/Sidebar";
+import Sidebar from "components/Builder/Sidebar";
+import TopBar from "components/Builder/TopBar";
 import { useBuilderContext } from "contexts";
+import { initialAttributes } from "utils/getInitialAttributes";
 import { createNewItem } from "utils/helpers";
 
 import Row from "./Row";
@@ -13,28 +15,12 @@ const Builder = () => {
   const {
     components,
     json,
-    removeComponent,
     selectComponent,
     selectedComponent,
     updateDocument,
   } = useBuilderContext();
 
   const [sections, moveSections] = useState([]);
-
-  const handleKeyDown = useCallback(
-    (e) => {
-      const key = e.key;
-
-      if (key === "Backspace") {
-        if (!selectedComponent) {
-          return null;
-        }
-
-        removeComponent(selectedComponent);
-      }
-    },
-    [removeComponent, selectedComponent]
-  );
 
   const handleOnDragEnd = (result) => {
     if (!result.destination) {
@@ -59,7 +45,8 @@ const Builder = () => {
   const onDrop = (event) => {
     event.preventDefault();
 
-    const componentName = event.dataTransfer.getData("application/builder");
+    const componentName = event.dataTransfer.getData("builder/name");
+    const attributes = initialAttributes[componentName];
 
     if (!componentName) {
       return null;
@@ -71,7 +58,7 @@ const Builder = () => {
 
     const newChild = createNewItem({
       componentName,
-      attributes: {},
+      attributes,
       children: [],
     });
 
@@ -91,59 +78,62 @@ const Builder = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleKeyDown]);
-
-  useEffect(() => {
     moveSections(json);
   }, [json]);
 
   return (
-    <BuilderWrapper onClick={handleBgClick}>
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Sidebar />
-        <PlayGroundWrapper onDragOver={onDragOver} onDrop={onDrop}>
-          {sections?.length > 0 ? (
-            <Droppable droppableId="body" type="SECTION">
-              {(provided) => (
-                <RowWrapper
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {sections.map((section, index) => {
-                    if (!section?.componentName) {
-                      return null;
-                    }
+    <>
+      {" "}
+      <TopBar />
+      <BuilderWrapper>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Sidebar />
+          <PlayGroundWrapper
+            onDragOver={onDragOver}
+            onDrop={onDrop}
+            onClick={handleBgClick}
+          >
+            {sections?.length > 0 ? (
+              <Droppable droppableId="body" type="SECTION">
+                {(provided) => (
+                  <RowWrapper
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {sections.map((section, index) => {
+                      if (!section?.componentName) {
+                        return null;
+                      }
 
-                    const Component = components[section.componentName];
+                      const Component = components[section.componentName];
 
-                    return (
-                      <div
-                        key={section.id}
-                        style={{ minHeight: section.attributes.height }}
-                      >
-                        <Row
-                          Component={Component}
-                          components={components}
-                          handleClick={() => selectComponent(section)}
-                          index={index}
-                          selectedComponent={selectedComponent}
-                          section={section}
-                        />
-                      </div>
-                    );
-                  })}
-                  {provided.placeholder}
-                </RowWrapper>
-              )}
-            </Droppable>
-          ) : (
-            <Empty text="Add your first element." />
-          )}
-        </PlayGroundWrapper>
-      </DragDropContext>
-    </BuilderWrapper>
+                      return (
+                        <div
+                          key={section.id}
+                          style={{ minHeight: section.attributes.height }}
+                        >
+                          <Row
+                            Component={Component}
+                            components={components}
+                            handleClick={() => selectComponent(section)}
+                            index={index}
+                            selectedComponent={selectedComponent}
+                            section={section}
+                          />
+                        </div>
+                      );
+                    })}
+                    {provided.placeholder}
+                  </RowWrapper>
+                )}
+              </Droppable>
+            ) : (
+              <Empty text="Add your first element." />
+            )}
+          </PlayGroundWrapper>
+        </DragDropContext>
+      </BuilderWrapper>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
+import Actions from "./Actions";
 import { useBuilderContext } from "contexts";
 
 const Resize = ({ Children, $isSelected, item, onClick }) => {
@@ -33,7 +34,7 @@ const Resize = ({ Children, $isSelected, item, onClick }) => {
 
   const onDragEnd = () => {
     updateAttributes(item.id, {
-      height: ref?.current.style.height,
+      height: ref?.current.style.height.slice(0, -2),
     });
   };
 
@@ -60,6 +61,7 @@ const Resize = ({ Children, $isSelected, item, onClick }) => {
       onDragLeave={() => setDraggedComponent(null)}
       onClick={onClick}
     >
+      {$isSelected && <Actions item={item} />}
       <Children resizeRef={ref} item={item} />
       {$isSelected && (
         <Handler
