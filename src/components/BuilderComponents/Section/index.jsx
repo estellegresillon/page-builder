@@ -5,7 +5,7 @@ const Section = ({ item, resizeRef }) => {
 
   return (
     <SectionWrapper $attributes={attributes} id={item.id} ref={resizeRef}>
-      ho
+      {attributes.text}
     </SectionWrapper>
   );
 };
@@ -16,7 +16,12 @@ export default Section;
 
 const SectionWrapper = styled.div`
   align-items: center;
-  background: red;
+  background-image: ${({ $attributes }) =>
+    `url(${$attributes.backgroundImage})`};
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: ${({ $attributes }) => $attributes.textColor};
   display: flex;
   flex-wrap: wrap;
   min-height: ${({ $attributes }) => `${$attributes.height}px`};

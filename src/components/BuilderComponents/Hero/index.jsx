@@ -5,7 +5,7 @@ const Hero = ({ item, resizeRef }) => {
 
   return (
     <HeroWrapper $attributes={attributes} id={item.id} ref={resizeRef}>
-      hi
+      {attributes.text}
     </HeroWrapper>
   );
 };
@@ -16,7 +16,12 @@ export default Hero;
 
 const HeroWrapper = styled.div`
   align-items: center;
-  background: blue;
+  background-image: ${({ $attributes }) =>
+    `url(${$attributes.backgroundImage})`};
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: ${({ $attributes }) => $attributes.textColor};
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -44,9 +44,10 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       const newJson = [...json];
       const component = newJson.filter((section) => {
         return section.id === sectionId;
-      });
+      })[0];
 
-      component[0].attributes = attributes;
+      component.attributes = { ...component.attributes, ...attributes };
+
       setJson(newJson);
     },
     [json]
