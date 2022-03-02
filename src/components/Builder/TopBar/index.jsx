@@ -18,9 +18,7 @@ const TopBar = () => {
           <Link to="/">Builder</Link>
         </Item>
         <Item>
-          <Link to="/prod" target="_blank" rel="noopener noreferrer">
-            Prod
-          </Link>
+          <Link to="/prod">Prod</Link>
         </Item>
       </div>
       <div className="actions">
