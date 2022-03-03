@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Button from "components/common/Button";
@@ -9,13 +9,13 @@ import { useBuilderContext } from "contexts";
 const token = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
 const url = `https://api.unsplash.com/photos?page=1&query=`;
 
-const Unsplash = ({ item }) => {
+const Unsplash = ({ attributeName, item }) => {
   const { updateAttributes } = useBuilderContext();
   const [photos, setPhotos] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("office");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const fetchUnsplash = () => {
+  const fetchUnsplash = useCallback(() => {
     axios
       .get(`${url}${search}`, {
         headers: {
@@ -24,11 +24,11 @@ const Unsplash = ({ item }) => {
       })
       .then((res) => setPhotos(res?.data))
       .catch((err) => console.log(err));
-  };
+  }, [search]);
 
   useEffect(() => {
     fetchUnsplash();
-  }, []);
+  }, [fetchUnsplash]);
 
   const updateBgImage = (imgUrl) => {
     updateAttributes(item.id, { backgroundImage: imgUrl });
@@ -41,7 +41,8 @@ const Unsplash = ({ item }) => {
         <ModalWrapper>
           <div onClick={() => setIsModalOpen(false)}>close</div>
           <Input
-            name="unsplash"
+            key={attributeName}
+            name={attributeName}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="search for a photo"
             value={search}
@@ -85,7 +86,9 @@ const PhotosWrapper = styled.div`
   width: 100%;
 
   img {
+    cursor: pointer;
     height: 100px;
+    object-fit: cover;
     width: 100px;
   }
 `;

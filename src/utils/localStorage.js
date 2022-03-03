@@ -1,7 +1,7 @@
 export const saveDocumentInLocalStorage = (json) => {
-  localStorage.setItem("json", JSON.stringify(json));
+  localStorage.setItem("builderJson", JSON.stringify(json));
 };
 
 export const getDocumentFromLocalStorage = () => {
-  return JSON.parse(localStorage.getItem("json"));
+  return JSON.parse(localStorage.getItem("builderJson")) || [];
 };

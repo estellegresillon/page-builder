@@ -16,7 +16,7 @@ const Prod = () => {
 
   return (
     <ProdWrapper>
-      {json?.length !== 0 ? (
+      {json?.length > 0 ? (
         json.map((section) => {
           if (!section?.componentName) {
             return null;

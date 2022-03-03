@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Input from "components/common/Input";
 import { useBuilderContext } from "contexts";
 
-const Height = ({ attribute, attributes, item }) => {
+const Height = ({ attributeName, attributes, item }) => {
   const { updateAttributes } = useBuilderContext();
   const [heightValue, setHeightValue] = useState(attributes.height);
 
@@ -16,10 +16,11 @@ const Height = ({ attribute, attributes, item }) => {
 
   return (
     <HeightWrapper>
-      <span className="attribute-name">{attribute} : </span>
+      <span className="attribute-name">{attributeName} : </span>
       <span className="attribute-value">
         <Input
-          name={attribute}
+          key={attributeName}
+          name={attributeName}
           onChange={updateHeight}
           placeholder="300"
           value={attributes.height || heightValue}

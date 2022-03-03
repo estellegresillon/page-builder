@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Input from "components/common/Input";
 import { useBuilderContext } from "contexts";
 
-const Text = ({ attribute, attributes, item }) => {
+const Text = ({ attributeName, attributes, item }) => {
   const { updateAttributes } = useBuilderContext();
   const [textValue, setTextValue] = useState(attributes.text);
 
@@ -16,10 +16,11 @@ const Text = ({ attribute, attributes, item }) => {
 
   return (
     <TextWrapper>
-      <span className="attribute-name">{attribute} : </span>
+      <span className="attribute-name">{attributeName} : </span>
       <span className="attribute-value">
         <Input
-          name={attribute}
+          key={attributeName}
+          name={attributeName}
           onChange={updateText}
           placeholder="enter text"
           value={attributes.text || textValue}

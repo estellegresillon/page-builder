@@ -19,42 +19,41 @@ const Settings = ({ selectedComponent }) => {
         <IconBack /> <div>Edit {selectedComponent?.componentName}</div>
       </div>
       <div className="settings-content">
-        {attributesList.map((attribute) => {
-          switch (attribute) {
+        {attributesList.map((attributeName) => {
+          switch (attributeName) {
             case "backgroundImage":
               return (
                 <Unsplash
-                  attribute={attribute}
-                  attributes={attributes}
+                  attributeName={attributeName}
                   item={selectedComponent}
-                  key={attribute}
+                  key={attributeName}
                 />
               );
             case "height":
               return (
                 <Height
-                  attribute={attribute}
+                  attributeName={attributeName}
                   attributes={attributes}
                   item={selectedComponent}
-                  key={attribute}
+                  key={attributeName}
                 />
               );
             case "text":
               return (
                 <Text
-                  attribute={attribute}
+                  attributeName={attributeName}
                   attributes={attributes}
                   item={selectedComponent}
-                  key={attribute}
+                  key={attributeName}
                 />
               );
             case "textColor":
               return (
                 <TextColor
-                  attribute={attribute}
+                  attributeName={attributeName}
                   attributes={attributes}
                   item={selectedComponent}
-                  key={attribute}
+                  key={attributeName}
                 />
               );
 
