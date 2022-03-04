@@ -8,6 +8,18 @@ import IconClose from "../IconClose";
 import Input from "../Input";
 import Select from "../Select";
 
+const FONTS = [
+  "Agenda",
+  "Austin",
+  "Bluu",
+  "Circular",
+  "Futura",
+  "Gilroy",
+  "Helvetica",
+  "Montserrat",
+  "Recife",
+];
+
 const Project = ({ onClose }) => {
   const { setProjectFont, setProjectName } = useBuilderContext();
   const [value, setValue] = useState("");
@@ -56,7 +68,7 @@ const Project = ({ onClose }) => {
       <Select
         name="font"
         onChange={(e) => setFont(e.target.value)}
-        options={["Gilroy", "sans-serif"]}
+        options={FONTS}
         placeholder="Select a font"
         value={font}
       />
@@ -112,6 +124,7 @@ const CloseButton = styled.div`
 const CreateButton = styled.div`
   border-radius: 5px;
   color: white;
+  cursor: pointer;
   margin: 10px;
   padding: 10px 0;
   text-align: center;

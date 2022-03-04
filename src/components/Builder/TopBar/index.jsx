@@ -41,7 +41,7 @@ const TopBar = () => {
             <span className="demo-tag">demo</span>
           </Link>
         </Item>
-        <Item>
+        <Item onClick={() => handleSaveDocument()}>
           <Link to="/prod" target="_blank" rel="noopener noreferer">
             Live preview
           </Link>

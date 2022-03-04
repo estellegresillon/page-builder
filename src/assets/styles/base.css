@@ -1,3 +1,40 @@
+@font-face {
+  font-family: "Agenda";
+  src: local("Agenda"), url(../fonts/agenda-bold.ttf) format("woff");
+}
+
+@font-face {
+  font-family: "Austin";
+  src: local("Austin"), url(../fonts/austin.ttf) format("woff");
+}
+
+@font-face {
+  font-family: "Bluu";
+  src: local("Bluu"), url(../fonts/BluuNext-Bold.otf) format("woff");
+}
+
+@font-face {
+  font-family: "Circular";
+  src: local("Circular"), url(../fonts/CircularStd-Bold.ttf) format("woff");
+}
+
+@font-face {
+  font-family: "Futura";
+  src: local("Futura"), url(../fonts/FuturaPT-Medium.ttf) format("woff");
+}
+
+@font-face {
+  font-family: "Helvetica";
+  src: local("Helvetica"),
+    url(../fonts/HelveticaNowDisplay-Medium.ttf) format("woff");
+}
+
+@font-face {
+  font-family: "Recife";
+  src: local("Recife"),
+    url(../fonts/RecifeDisplayWeb-Regular.ttf) format("woff");
+}
+
 body {
   margin: 0;
   font-family: "Gilroy", sans-serif;

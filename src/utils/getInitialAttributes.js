@@ -1,7 +1,7 @@
 export const initialAttributes = {
   Gallery: {
     columns: "3",
-    margin: "5",
+    itemCount: "16",
     resizable: false,
   },
   Hero: {
@@ -12,7 +12,21 @@ export const initialAttributes = {
     alignment: { alignItems: "center", justifyContent: "center" },
     resizable: false,
   },
+  Partners: {
+    itemCount: "5",
+    height: "200",
+    resizable: true,
+  },
   Section: {
+    title: "A catchphrase for your section",
+    description: "A little text description",
+    textColor: "black",
+    bgColor: "white",
+    alignment: { alignItems: "center", justifyContent: "center" },
+    resizable: false,
+    reversed: false,
+  },
+  TextBlock: {
     title: "A catchphrase for your section",
     description: "A little text description",
     textColor: "black",

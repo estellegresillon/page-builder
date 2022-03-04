@@ -5,17 +5,10 @@ import styled from "styled-components";
 import { useBuilderContext } from "contexts";
 import { useOnClickOutside } from "hooks/useOnClickOutside";
 
-const getAttributeName = (key) => {
-  switch (key) {
-    case "textColor":
-      return "Text color";
-    case "buttonColor":
-      return "Button color";
-    case "bgColor":
-      return "BG color";
-    default:
-      return;
-  }
+const NAME = {
+  bgColor: "BG color",
+  buttonColor: "Button color",
+  textColor: "Text color",
 };
 
 const Color = ({ attributeKey, attributes, item }) => {
@@ -30,7 +23,7 @@ const Color = ({ attributeKey, attributes, item }) => {
 
   return (
     <ColorWrapper>
-      <div className="attribute-name">{getAttributeName(attributeKey)} :</div>
+      <div className="attribute-name">{NAME[attributeKey]} :</div>
       <div className="attribute-value">
         <ColorButton
           $color={attributes[attributeKey]}

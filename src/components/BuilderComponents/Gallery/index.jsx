@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 import { getItemHeight, getItemWidth } from "utils/helpers";
 
-const PICTURES = ["1", "2", "3", "4", "5"];
+const PICTURES = Array.from({ length: 16 }, (_, i) => (i + 1).toString());
 
 const Gallery = ({ item, resizeRef }) => {
   const { attributes } = item;
 
   return (
     <GalleryWrapper $attributes={attributes} id={item.id} ref={resizeRef}>
-      {PICTURES.map((picture) => (
+      {PICTURES.slice(0, attributes.itemCount).map((picture) => (
         <img key={picture} src={`builder/${picture}.jpg`} alt={picture} />
       ))}
     </GalleryWrapper>

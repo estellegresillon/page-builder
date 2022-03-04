@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 import IconBack from "components/common/IconBack";
 import Alignment from "components/Settings/Alignment";
-import Columns from "components/Settings/Columns";
+import Checkbox from "components/Settings/Checkbox";
 import Height from "components/Settings/Height";
+import SelectNumber from "components/Settings/SelectNumber";
 import Text from "components/Settings/Text";
 import Color from "components/Settings/Color";
 import { useBuilderContext } from "contexts";
@@ -19,6 +20,7 @@ const Settings = ({ selectedComponent }) => {
       <div className="close-settings" onClick={() => selectComponent(null)}>
         <IconBack /> <div>Back to list</div>
       </div>
+      <h3>{selectedComponent.componentName}</h3>
       <div className="settings-content">
         {attributesList.map((attributeName) => {
           switch (attributeName) {
@@ -62,9 +64,19 @@ const Settings = ({ selectedComponent }) => {
                   key={attributeName}
                 />
               );
+            case "itemCount":
             case "columns":
               return (
-                <Columns
+                <SelectNumber
+                  attributeKey={attributeName}
+                  attributes={attributes}
+                  item={selectedComponent}
+                  key={attributeName}
+                />
+              );
+            case "reversed":
+              return (
+                <Checkbox
                   attributeKey={attributeName}
                   attributes={attributes}
                   item={selectedComponent}
@@ -86,6 +98,8 @@ const SettingsWrapper = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
+  margin-bottom: 25px;
+  margin-top: 10px;
   width: 100%;
 
   .close-settings {
