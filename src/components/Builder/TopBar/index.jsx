@@ -15,17 +15,17 @@ const TopBar = () => {
     <TopBarWrapper>
       <div className="routes">
         <Item>
-          <Link to="/">Builder</Link>
+          <Link to="/">Page Builder</Link>
         </Item>
         <Item>
           <Link to="/prod" target="_blank" rel="noopener noreferer">
-            Prod
+            Live preview
           </Link>
         </Item>
       </div>
       <div className="actions">
         <Item onClick={() => handleSaveDocument()}>Save</Item>
-        <Item onClick={() => resetJson()}>Clean</Item>
+        <Item onClick={() => resetJson()}>Start over</Item>
       </div>
     </TopBarWrapper>
   );
@@ -35,8 +35,9 @@ export default TopBar;
 
 const TopBarWrapper = styled.div`
   align-items: center;
-  background: white;
-  box-shadow: 0 1px 30px 0 rgb(0 0 0 / 20%);
+  background-color: #252628;
+  box-shadow: 0 1px 30px 0 rgb(0 0 0 / 30%);
+  color: white;
   display: flex;
   height: 70px;
   justify-content: space-between;
@@ -57,7 +58,7 @@ const Item = styled.div`
   text-align: center;
 
   a {
-    color: black;
+    color: white;
     text-decoration: none;
   }
 `;

@@ -24,18 +24,10 @@ const Prod = () => {
 
           const Section = components[section.componentName];
 
-          return (
-            <Section item={section} key={section.id}>
-              {section.children.map((single) => {
-                const Single = components[single.componentName];
-
-                return <Single item={single} key={single.id} />;
-              })}
-            </Section>
-          );
+          return <Section item={section} key={section.id} />;
         })
       ) : (
-        <Empty text="Create your page in the page builder." />
+        <Empty text="Create your page in the builder." />
       )}
     </ProdWrapper>
   );

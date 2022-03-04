@@ -17,3 +17,16 @@ export const traverseItem = (item, updater) => {
 
 export const createNewItem = (item) =>
   traverseItem(cloneDeep(item), (item) => (item.id = uuid()));
+
+export const getTextAlign = (alignment) => {
+  console.log(alignment);
+  if (alignment === "flex-start") {
+    return "left";
+  }
+
+  if (alignment === "flex-end") {
+    return "right";
+  }
+
+  return "center";
+};

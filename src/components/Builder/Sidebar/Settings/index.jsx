@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 import IconBack from "components/common/IconBack";
+import Alignment from "components/Settings/Alignment";
 import Height from "components/Settings/Height";
 import Text from "components/Settings/Text";
-import TextColor from "components/Settings/TextColor";
-import Unsplash from "components/Settings/Unsplash";
+import Color from "components/Settings/Color";
 import { useBuilderContext } from "contexts";
 
 const Settings = ({ selectedComponent }) => {
@@ -21,10 +21,11 @@ const Settings = ({ selectedComponent }) => {
       <div className="settings-content">
         {attributesList.map((attributeName) => {
           switch (attributeName) {
-            case "backgroundImage":
+            case "alignment":
               return (
-                <Unsplash
-                  attributeName={attributeName}
+                <Alignment
+                  attributeKey={attributeName}
+                  attributes={attributes}
                   item={selectedComponent}
                   key={attributeName}
                 />
@@ -32,25 +33,28 @@ const Settings = ({ selectedComponent }) => {
             case "height":
               return (
                 <Height
-                  attributeName={attributeName}
+                  attributeKey={attributeName}
                   attributes={attributes}
                   item={selectedComponent}
                   key={attributeName}
                 />
               );
-            case "text":
+            case "description":
+            case "subtitle":
+            case "title":
               return (
                 <Text
-                  attributeName={attributeName}
+                  attributeKey={attributeName}
                   attributes={attributes}
                   item={selectedComponent}
                   key={attributeName}
                 />
               );
+            case "bgColor":
             case "textColor":
               return (
-                <TextColor
-                  attributeName={attributeName}
+                <Color
+                  attributeKey={attributeName}
                   attributes={attributes}
                   item={selectedComponent}
                   key={attributeName}

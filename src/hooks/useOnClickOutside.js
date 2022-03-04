@@ -1,5 +1,9 @@
 import { useEffect } from "react";
 
+// const ref = useRef();
+// const [isModalOpen, setModalOpen] = useState(false);
+// useOnClickOutside(ref, () => setModalOpen(false));
+
 export function useOnClickOutside(ref, handler) {
   useEffect(() => {
     const listener = (event) => {

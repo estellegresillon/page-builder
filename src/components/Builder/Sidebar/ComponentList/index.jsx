@@ -34,13 +34,12 @@ const ListWrapper = styled.div`
 `;
 
 const Item = styled.div`
-  color: black;
   cursor: pointer;
   margin: 5px;
   padding: 30px;
   text-align: center;
 
   &:hover {
-    background-color: #e9e9e9;
+    background-color: #0b0b0b;
   }
 `;

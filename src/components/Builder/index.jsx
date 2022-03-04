@@ -155,7 +155,7 @@ const PlayGroundWrapper = styled.div`
   overflow: scroll;
   padding-bottom: 200px;
   position: relative;
-  width: calc(100vw - 300px);
+  width: calc(100vw - 250px);
   z-index: 0;
 `;
 

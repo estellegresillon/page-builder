@@ -5,7 +5,8 @@ const Section = ({ item, resizeRef }) => {
 
   return (
     <SectionWrapper $attributes={attributes} id={item.id} ref={resizeRef}>
-      {attributes.text}
+      <h1>{attributes.title}</h1>
+      <p>{attributes.description}</p>
     </SectionWrapper>
   );
 };
@@ -15,16 +16,12 @@ Section.componentName = "Section";
 export default Section;
 
 const SectionWrapper = styled.div`
-  align-items: center;
-  background-image: ${({ $attributes }) =>
-    `url(${$attributes.backgroundImage})`};
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  align-items: ${({ $attributes }) => $attributes.alignment.alignItems};
+  background: ${({ $attributes }) => $attributes.bgColor};
   color: ${({ $attributes }) => $attributes.textColor};
   display: flex;
-  flex-wrap: wrap;
-  min-height: ${({ $attributes }) => `${$attributes.height}px`};
-  justify-content: space-evenly;
+  flex-direction: column;
+  height: ${({ $attributes }) => `${$attributes.height}px`};
+  justify-content: ${({ $attributes }) => $attributes.alignment.justifyContent};
   width: 100%;
 `;
