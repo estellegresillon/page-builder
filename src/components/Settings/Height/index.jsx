@@ -16,8 +16,8 @@ const Height = ({ attributeKey, attributes, item }) => {
 
   return (
     <HeightWrapper>
-      <span className="attribute-name">{attributeKey} : </span>
-      <span className="attribute-value">
+      <div className="attribute-name">{attributeKey} : </div>
+      <div className="attribute-value">
         <Input
           key={attributeKey}
           name={attributeKey}
@@ -25,7 +25,7 @@ const Height = ({ attributeKey, attributes, item }) => {
           placeholder="300"
           value={attributes.height || heightValue}
         />
-      </span>
+      </div>
     </HeightWrapper>
   );
 };
@@ -34,4 +34,8 @@ export default Height;
 
 const HeightWrapper = styled.div`
   margin-bottom: 20px;
+
+  .attribute-name {
+    margin-bottom: 10px;
+  }
 `;

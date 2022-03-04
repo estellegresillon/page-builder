@@ -6,11 +6,7 @@ const ALIGNMENTS = ["flex-start", "center", "flex-end"];
 
 const Alignment = ({ attributeKey, attributes, item }) => {
   const { updateAttributes } = useBuilderContext();
-
-  const handleIsSelected = (align, justify) => {
-    const { alignItems, justifyContent } = attributes.alignment;
-    return alignItems === align && justifyContent === justify;
-  };
+  const { alignItems, justifyContent } = attributes.alignment;
 
   const updateAlignment = (align, justify) => {
     updateAttributes(item.id, {
@@ -30,7 +26,7 @@ const Alignment = ({ attributeKey, attributes, item }) => {
               className={`box ${a}`}
             >
               <CircleWrapper
-                $isSelected={handleIsSelected(a, j)}
+                $isSelected={alignItems === a && justifyContent === j}
                 className="circle"
               />
             </div>
@@ -45,6 +41,10 @@ export default Alignment;
 
 const AlignmentWrapper = styled.div`
   margin-bottom: 20px;
+
+  .attribute-name {
+    margin: 10px 0;
+  }
 
   .row {
     align-items: center;
@@ -65,7 +65,8 @@ const AlignmentWrapper = styled.div`
 `;
 
 const CircleWrapper = styled.div`
-  background-color: ${({ $isSelected }) => ($isSelected ? "red" : "lightgray")};
+  background-color: ${({ $isSelected }) =>
+    $isSelected ? "#d40c0c" : "lightgray"};
   border-radius: 50%;
   height: 10px;
   width: 10px;

@@ -1,22 +1,26 @@
 import styled from "styled-components";
 
-const Button = ({ onClick, text }) => (
-  <ButtonWrapper onClick={onClick}>{text}</ButtonWrapper>
+const Button = ({ color, onClick, text }) => (
+  <ButtonWrapper $color={color} onClick={onClick}>
+    {text}
+  </ButtonWrapper>
 );
 
 export default Button;
 
 const ButtonWrapper = styled.div`
-  border-radius: 10px;
+  border-radius: 25px;
   color: white;
   cursor: pointer;
-  margin: 10px;
-  padding: 10px 0;
+  font-weight: bolder;
+  margin: 0 auto;
+  margin-top: 19px;
+  padding: 12px 0;
   text-align: center;
-  width: calc(100% - 20px);
-  background-color: #365ed3;
+  width: 150px;
+  background-color: ${({ $color }) => $color};
 
   &:hover {
-    background-color: #092578;
+    filter: brightness(85%);
   }
 `;

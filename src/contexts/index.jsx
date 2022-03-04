@@ -7,7 +7,10 @@ import {
 } from "react";
 
 import { getComponents } from "utils/getBuilderComponents";
-import { getDocumentFromLocalStorage } from "utils/localStorage";
+import {
+  getDataFromLocalStorage,
+  getDocumentFromLocalStorage,
+} from "utils/localStorage";
 
 const BuilderContext = createContext({
   components: [],
@@ -18,6 +21,12 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
   const [json, setJson] = useState(getDocumentFromLocalStorage() || []);
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [draggedComponent, setDraggedComponent] = useState(null);
+  const [projectName, setProjectName] = useState(
+    getDataFromLocalStorage("project") || "Project Name"
+  );
+  const [projectFont, setProjectFont] = useState(
+    getDataFromLocalStorage("font") || "Gilroy"
+  );
 
   const selectComponent = useCallback((item) => {
     setSelectedComponent(item);
@@ -30,7 +39,10 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       });
 
       setJson(newJson);
-      setSelectedComponent(null);
+
+      setTimeout(() => {
+        setSelectedComponent(null);
+      }, 100);
     },
     [json]
   );
@@ -63,11 +75,15 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       components,
       draggedComponent,
       json,
+      projectFont,
+      projectName,
       removeComponent,
       resetJson,
       selectComponent,
       selectedComponent,
       setDraggedComponent,
+      setProjectFont,
+      setProjectName,
       updateAttributes,
       updateDocument,
     }),
@@ -75,11 +91,15 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       components,
       draggedComponent,
       json,
+      projectFont,
+      projectName,
       removeComponent,
       resetJson,
       selectComponent,
       selectedComponent,
       setDraggedComponent,
+      setProjectFont,
+      setProjectName,
       updateAttributes,
       updateDocument,
     ]

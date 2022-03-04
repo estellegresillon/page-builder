@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Empty from "components/common/Empty";
+import ProdMenu from "components/common/ProdMenu";
 import { getComponents } from "utils/getBuilderComponents";
-import { getDocumentFromLocalStorage } from "utils/localStorage";
+import {
+  getDataFromLocalStorage,
+  getDocumentFromLocalStorage,
+} from "utils/localStorage";
 
 const Prod = () => {
   const components = getComponents();
@@ -15,7 +19,8 @@ const Prod = () => {
   }, []);
 
   return (
-    <ProdWrapper>
+    <ProdWrapper $font={getDataFromLocalStorage("font")}>
+      <ProdMenu />
       {json?.length > 0 ? (
         json.map((section) => {
           if (!section?.componentName) {
@@ -41,5 +46,6 @@ const ProdWrapper = styled.div`
   min-height: 100vh;
   position: relative;
   flex-direction: column;
+  font-family: ${({ $font }) => $font};
   width: 100%;
 `;

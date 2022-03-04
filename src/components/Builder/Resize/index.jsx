@@ -100,7 +100,7 @@ const ResizeWrapper = styled.div`
 
   &:before {
     box-shadow: ${({ $isSelected }) =>
-      $isSelected ? "inset 0px 0px 0px 3px lightgray" : "none"};
+      $isSelected ? "inset 0px 0px 0px 3px #d40c0c" : "none"};
     content: "";
     display: block;
     left: 0;
@@ -113,13 +113,13 @@ const ResizeWrapper = styled.div`
 
   &:hover {
     &:before {
-      box-shadow: inset 0px 0px 0px 3px lightgray;
+      box-shadow: inset 0px 0px 0px 3px #d40c0c;
     }
   }
 `;
 
 const Handler = styled.div`
-  background-color: lightgray;
+  background-color: #d40c0c;
   bottom: -15px;
   cursor: row-resize;
   height: 16px;

@@ -3,8 +3,9 @@ body {
   font-family: "Gilroy", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  position: relative;
+  font-size: 14px;
   min-height: 100vh;
+  position: relative;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -17,4 +18,9 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+h1,
+p {
+  margin: 0;
 }

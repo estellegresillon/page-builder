@@ -12,6 +12,7 @@ const ComponentList = () => {
 
   return components ? (
     <ListWrapper>
+      <div className="list-title">Component list</div>
       {Object.keys(components).map((component) => (
         <Item
           draggable
@@ -31,15 +32,24 @@ const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  .list-title {
+    margin: 30px 0 25px 0;
+    text-align: center;
+    width: 100%;
+  }
 `;
 
 const Item = styled.div`
-  cursor: pointer;
-  margin: 5px;
+  border-radius: 2px;
+  cursor: grab;
+  font-weight: bolder;
+  margin: 5px 10px;
   padding: 30px;
   text-align: center;
+  border: 1px solid gray;
 
   &:hover {
-    background-color: #0b0b0b;
+    background-color: #36383b;
   }
 `;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import IconBack from "components/common/IconBack";
 import Alignment from "components/Settings/Alignment";
+import Columns from "components/Settings/Columns";
 import Height from "components/Settings/Height";
 import Text from "components/Settings/Text";
 import Color from "components/Settings/Color";
@@ -16,7 +17,7 @@ const Settings = ({ selectedComponent }) => {
   return (
     <SettingsWrapper id="settings">
       <div className="close-settings" onClick={() => selectComponent(null)}>
-        <IconBack /> <div>Edit {selectedComponent?.componentName}</div>
+        <IconBack /> <div>Back to list</div>
       </div>
       <div className="settings-content">
         {attributesList.map((attributeName) => {
@@ -51,6 +52,7 @@ const Settings = ({ selectedComponent }) => {
                 />
               );
             case "bgColor":
+            case "buttonColor":
             case "textColor":
               return (
                 <Color
@@ -60,7 +62,15 @@ const Settings = ({ selectedComponent }) => {
                   key={attributeName}
                 />
               );
-
+            case "columns":
+              return (
+                <Columns
+                  attributeKey={attributeName}
+                  attributes={attributes}
+                  item={selectedComponent}
+                  key={attributeName}
+                />
+              );
             default:
               return null;
           }
@@ -79,18 +89,22 @@ const SettingsWrapper = styled.div`
   width: 100%;
 
   .close-settings {
+    align-items: center;
+    cursor: pointer;
     display: flex;
     margin: 20px;
 
     svg {
-      cursor: pointer;
       height: 15px;
-      margin-right: 20px;
+      margin-right: 10px;
       width: 15px;
     }
   }
 
   .settings-content {
+    margin: 0 20px;
+    width: calc(100% - 40px);
+
     .attribute-name {
       text-transform: capitalize;
     }

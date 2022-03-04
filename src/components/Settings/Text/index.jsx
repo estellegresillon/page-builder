@@ -16,16 +16,16 @@ const Text = ({ attributeKey, attributes, item }) => {
 
   return (
     <TextWrapper>
-      <span className="attribute-name">{attributeKey} : </span>
-      <span className="attribute-value">
+      <div className="attribute-name">{attributeKey} : </div>
+      <div className="attribute-value">
         <Input
           key={attributeKey}
           name={attributeKey}
           onChange={updateText}
-          placeholder="enter text"
+          placeholder={`Enter a ${attributeKey}`}
           value={attributes[attributeKey] || textValue}
         />
-      </span>
+      </div>
     </TextWrapper>
   );
 };
@@ -34,4 +34,8 @@ export default Text;
 
 const TextWrapper = styled.div`
   margin-bottom: 20px;
+
+  .attribute-name {
+    margin-bottom: 10px;
+  }
 `;

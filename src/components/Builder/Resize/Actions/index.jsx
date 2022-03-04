@@ -28,7 +28,7 @@ export default Resize;
 
 const ActionsWrapper = styled.div`
   align-items: center;
-  background-color: lightgray;
+  background-color: #d40c0c;
   border-radius: 3px;
   cursor: pointer;
   display: flex;

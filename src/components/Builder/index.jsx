@@ -3,6 +3,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 import Empty from "components/common/Empty";
+import ProdMenu from "components/common/ProdMenu";
 import Sidebar from "components/Builder/Sidebar";
 import TopBar from "components/Builder/TopBar";
 import { useBuilderContext } from "contexts";
@@ -15,6 +16,7 @@ const Builder = () => {
   const {
     components,
     json,
+    projectFont,
     selectComponent,
     selectedComponent,
     updateDocument,
@@ -71,28 +73,22 @@ const Builder = () => {
     updateDocument(items);
   };
 
-  const handleBgClick = (e) => {
-    if (!e.target.id) {
-      selectComponent(null);
-    }
-  };
-
   useEffect(() => {
     moveSections(json);
   }, [json]);
 
   return (
     <>
-      {" "}
       <TopBar />
       <BuilderWrapper>
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Sidebar />
           <PlayGroundWrapper
+            $font={projectFont}
             onDragOver={onDragOver}
             onDrop={onDrop}
-            onClick={handleBgClick}
           >
+            <ProdMenu />
             {sections?.length > 0 ? (
               <Droppable droppableId="body" type="SECTION">
                 {(provided) => (
@@ -151,6 +147,7 @@ const PlayGroundWrapper = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
+  font-family: ${({ $font }) => $font};
   height: calc(100vh - 270px);
   overflow: scroll;
   padding-bottom: 200px;

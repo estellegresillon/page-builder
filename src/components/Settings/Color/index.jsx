@@ -5,6 +5,19 @@ import styled from "styled-components";
 import { useBuilderContext } from "contexts";
 import { useOnClickOutside } from "hooks/useOnClickOutside";
 
+const getAttributeName = (key) => {
+  switch (key) {
+    case "textColor":
+      return "Text color";
+    case "buttonColor":
+      return "Button color";
+    case "bgColor":
+      return "BG color";
+    default:
+      return;
+  }
+};
+
 const Color = ({ attributeKey, attributes, item }) => {
   const { updateAttributes } = useBuilderContext();
   const ref = useRef();
@@ -17,10 +30,8 @@ const Color = ({ attributeKey, attributes, item }) => {
 
   return (
     <ColorWrapper>
-      <span className="attribute-name">
-        {attributeKey === "textColor" ? "Text color" : "BG color"} :{" "}
-      </span>
-      <span className="attribute-value">
+      <div className="attribute-name">{getAttributeName(attributeKey)} :</div>
+      <div className="attribute-value">
         <ColorButton
           $color={attributes[attributeKey]}
           onClick={() => setPickerOpen(true)}
@@ -33,7 +44,7 @@ const Color = ({ attributeKey, attributes, item }) => {
             />
           </PickerWrapper>
         )}
-      </span>
+      </div>
     </ColorWrapper>
   );
 };
@@ -50,7 +61,7 @@ const ColorButton = styled.div`
   border-radius: 50%;
   cursor: pointer;
   height: 40px;
-  margin: 20px 0;
+  margin: 10px 0;
   position: relative;
   width: 40px;
 `;

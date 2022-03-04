@@ -18,18 +18,19 @@ const InputWrapper = styled.div`
   width: 100%;
 
   input {
-    background-color: white;
+    background-color: #252628;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 1px 30px 0 rgb(69 129 192 / 20%);
-    color: #30305a;
+    box-shadow: 0 1px 10px 0 rgb(0 0 0 / 50%);
+    color: #ffffff;
+    font-family: Gilroy;
     height: 35px;
     outline: 0;
-    padding-left: 15px;
-    width: calc(100% - 17px);
+    padding-left: 14px;
+    width: calc(100% - 37px);
 
     &::placeholder {
-      color: #30305a;
+      color: lightgray;
       opacity: 0.5;
     }
   }

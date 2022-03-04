@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import Button from "components/common/Button";
 import { getTextAlign } from "utils/helpers";
 
 const Hero = ({ isInBuilder = false, item, resizeRef }) => {
@@ -12,9 +13,10 @@ const Hero = ({ isInBuilder = false, item, resizeRef }) => {
       id={item.id}
       ref={resizeRef}
     >
-      <div className="content" style={{ margin: "20% 10%" }}>
+      <div className="content" style={{ margin: "10%" }}>
         <h1>{attributes.title}</h1>
         <p>{attributes.subtitle}</p>
+        <Button color={attributes.buttonColor} text="Discover" />
       </div>
     </HeroWrapper>
   );
@@ -42,5 +44,11 @@ const HeroWrapper = styled.div`
 
   h1 {
     font-size: 72px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 20px;
+    margin-bottom: 10px;
   }
 `;
