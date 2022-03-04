@@ -42,9 +42,7 @@ const TopBar = () => {
           </Link>
         </Item>
         <Item onClick={() => handleSaveDocument()}>
-          <Link to="/prod" target="_blank" rel="noopener noreferer">
-            Live preview
-          </Link>
+          <Link to="/prod">Live preview</Link>
         </Item>
       </div>
       <div className="actions">
