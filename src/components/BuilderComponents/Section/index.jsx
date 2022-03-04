@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { getTextAlign } from "utils/helpers";
+
 const Section = ({ item, resizeRef }) => {
   const { attributes } = item;
 
@@ -23,5 +25,11 @@ const SectionWrapper = styled.div`
   flex-direction: column;
   height: ${({ $attributes }) => `${$attributes.height}px`};
   justify-content: ${({ $attributes }) => $attributes.alignment.justifyContent};
+  text-align: ${({ $attributes }) =>
+    getTextAlign($attributes.alignment.alignItems)};
   width: 100%;
+
+  h1 {
+    font-size: 72px;
+  }
 `;
