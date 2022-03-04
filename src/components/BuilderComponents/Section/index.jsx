@@ -6,8 +6,6 @@ import { getTextAlign } from "utils/helpers";
 const Section = ({ item, resizeRef }) => {
   const { attributes } = item;
 
-  console.log(attributes);
-
   return (
     <SectionWrapper $attributes={attributes} id={item.id} ref={resizeRef}>
       <SectionContent $attributes={attributes}>
