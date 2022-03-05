@@ -13,7 +13,7 @@ const Section = ({ item, resizeRef }) => {
         <Divider color={attributes.textColor} />
         <p>{attributes.description}</p>
       </SectionContent>
-      <img src="builder/42.jpeg" alt="section" />
+      <img src="builder/10.jpg" alt="section" />
     </SectionWrapper>
   );
 };

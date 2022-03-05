@@ -1,7 +1,22 @@
 export const initialAttributes = {
+  Contact: {
+    title: "Contact",
+    description:
+      "Here is a section to display your contact infos and tell more your user about the possible inquiries and project you could to together.",
+    reversed: false,
+    height: "400",
+    textColor: "black",
+    bgColor: "white",
+    mail: "estelle.gresillon@gmail.com",
+    linkedIn: "https://www.linkedin.com/in/estellegresillon",
+    instagram: "https://www.instagram.com/estelle.gresillon",
+    dribbble: "https://dribbble.com/estellegresillon",
+    other: "estellegresillon.fr",
+    resizable: true,
+  },
   Gallery: {
     columns: "3",
-    itemCount: "16",
+    itemCount: "9",
     hasColGap: false,
     colGap: "5",
     hasSectionGap: false,

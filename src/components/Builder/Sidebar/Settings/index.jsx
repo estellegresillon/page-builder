@@ -45,6 +45,11 @@ const Settings = ({ selectedComponent }) => {
             case "description":
             case "subtitle":
             case "title":
+            case "mail":
+            case "dribbble":
+            case "instagram":
+            case "linkedIn":
+            case "other":
               return (
                 <Text
                   attributeKey={attributeName}
