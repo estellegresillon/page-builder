@@ -24,6 +24,18 @@
 }
 
 @font-face {
+  font-family: "Gilroy";
+  font-weight: normal;
+  src: local("Gilroy"), url(../fonts/Gilroy-Light.otf) format("woff");
+}
+
+@font-face {
+  font-family: "Gilroy";
+  font-weight: bold;
+  src: local("Gilroy"), url(../fonts/Gilroy-ExtraBold.otf) format("woff");
+}
+
+@font-face {
   font-family: "Recife";
   src: local("Recife"),
     url(../fonts/RecifeDisplayWeb-Regular.ttf) format("woff");
