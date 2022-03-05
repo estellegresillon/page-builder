@@ -138,7 +138,7 @@ export default Builder;
 const BuilderWrapper = styled.div`
   align-items: center;
   display: flex;
-  min-height: calc(100vh - 260px);
+  height: calc(100vh - 70px);
   position: relative;
   width: 100%;
 `;

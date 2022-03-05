@@ -26,7 +26,8 @@ const SidebarWrapper = styled.div`
   color: white;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 70px);
+  height: 100%;
+  overflow: scroll;
   width: 250px;
   z-index: 1;
 `;

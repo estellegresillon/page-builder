@@ -75,6 +75,8 @@ const Settings = ({ selectedComponent }) => {
                 />
               );
             case "reversed":
+            case "hasColGap":
+            case "hasSectionGap":
               return (
                 <Checkbox
                   attributeKey={attributeName}

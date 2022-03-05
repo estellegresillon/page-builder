@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import styled from "styled-components";
 
 import { useBuilderContext } from "contexts";
@@ -15,44 +15,37 @@ const FONTS = [
   "Circular",
   "Futura",
   "Gilroy",
-  "Helvetica",
   "Montserrat",
   "Recife",
 ];
 
 const Project = ({ onClose }) => {
-  const { setProjectFont, setProjectName } = useBuilderContext();
-  const [value, setValue] = useState("");
-  const [font, setFont] = useState("");
+  const { projectFont, projectName, setProjectFont, setProjectName } =
+    useBuilderContext();
 
-  const onClick = useCallback(() => {
-    if (!value && !font) {
-      return;
-    }
-
-    if (value) {
-      saveDataInLocalStorage("project", value);
-      setProjectName(value);
-    }
-
+  const updateFont = (font) => {
     if (font) {
       saveDataInLocalStorage("font", font);
       setProjectFont(font);
     }
+  };
 
-    setValue("");
-    onClose();
-  }, [font, onClose, setProjectFont, setProjectName, value]);
+  const updateProjectName = (name) => {
+    if (name) {
+      saveDataInLocalStorage("project", name);
+      setProjectName(name);
+    }
+  };
 
   const handleKeyDown = useCallback(
     (e) => {
       const key = e.key;
 
       if (key === "Enter") {
-        onClick();
+        onClose();
       }
     },
-    [onClick]
+    [onClose]
   );
 
   useEffect(() => {
@@ -67,18 +60,18 @@ const Project = ({ onClose }) => {
       </CloseButton>
       <Select
         name="font"
-        onChange={(e) => setFont(e.target.value)}
+        onChange={(e) => updateFont(e.target.value)}
         options={FONTS}
         placeholder="Select a font"
-        value={font}
+        value={projectFont}
       />
       <Input
         name="project"
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => updateProjectName(e.target.value)}
         placeholder="Enter a name for your project"
-        value={value}
+        value={projectName}
       />
-      <CreateButton onClick={onClick}>Update</CreateButton>
+      <UpdateButton onClick={onClose}>Done</UpdateButton>
     </ProjectWrapper>
   );
 };
@@ -121,7 +114,7 @@ const CloseButton = styled.div`
   margin: 5px;
 `;
 
-const CreateButton = styled.div`
+const UpdateButton = styled.div`
   border-radius: 5px;
   color: white;
   cursor: pointer;

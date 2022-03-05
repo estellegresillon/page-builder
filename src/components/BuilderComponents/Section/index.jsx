@@ -27,6 +27,7 @@ const SectionWrapper = styled.div`
   display: flex;
   flex-direction: ${({ $attributes }) =>
     $attributes.reversed ? "row-reverse" : "row"};
+  margin: ${({ $attributes }) => ($attributes.hasSectionGap ? `5% 0` : "0")};
   height: 80vh;
   width: 100%;
 

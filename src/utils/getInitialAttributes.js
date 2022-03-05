@@ -2,6 +2,9 @@ export const initialAttributes = {
   Gallery: {
     columns: "3",
     itemCount: "16",
+    hasColGap: false,
+    colGap: "5",
+    hasSectionGap: false,
     resizable: false,
   },
   Hero: {
@@ -25,6 +28,7 @@ export const initialAttributes = {
     alignment: { alignItems: "center", justifyContent: "center" },
     resizable: false,
     reversed: false,
+    hasSectionGap: false,
   },
   TextBlock: {
     title: "A catchphrase for your section",

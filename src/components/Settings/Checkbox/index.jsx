@@ -2,6 +2,12 @@ import styled from "styled-components";
 
 import { useBuilderContext } from "contexts";
 
+const NAME = {
+  hasColGap: "Column gap",
+  hasSectionGap: "Section gap",
+  reversed: "Reversed layout",
+};
+
 const Checkbox = ({ attributeKey, attributes, item }) => {
   const { updateAttributes } = useBuilderContext();
 
@@ -13,11 +19,11 @@ const Checkbox = ({ attributeKey, attributes, item }) => {
   return (
     <CheckboxWrapper>
       <div className="attribute-value">
-        <label htmlFor={attributeKey} name={attributeKey}>
-          {attributeKey}
+        <label htmlFor={NAME[attributeKey]} name={NAME[attributeKey]}>
+          {NAME[attributeKey]}
         </label>
         <input
-          id={attributeKey}
+          id={NAME[attributeKey]}
           onClick={updateValue}
           type="radio"
           checked={attributes[attributeKey]}

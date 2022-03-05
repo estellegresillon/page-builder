@@ -24,12 +24,6 @@
 }
 
 @font-face {
-  font-family: "Helvetica";
-  src: local("Helvetica"),
-    url(../fonts/HelveticaNowDisplay-Medium.ttf) format("woff");
-}
-
-@font-face {
   font-family: "Recife";
   src: local("Recife"),
     url(../fonts/RecifeDisplayWeb-Regular.ttf) format("woff");

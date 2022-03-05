@@ -10,13 +10,13 @@ const NAME = {
 };
 
 const OPTIONS = (component) => ({
-  columns: Array.from({ length: 5 }, (_, i) => (i + 1).toString()),
+  columns: Array.from({ length: 4 }, (_, i) => (i + 1).toString()),
   itemCount: Array.from({ length: component === "Partners" ? 6 : 16 }, (_, i) =>
     (i + 1).toString()
   ),
 });
 
-const Columns = ({ attributeKey, attributes, item }) => {
+const SelectNumber = ({ attributeKey, attributes, item }) => {
   const { updateAttributes } = useBuilderContext();
   const [value, setValue] = useState(attributes[attributeKey]);
 
@@ -27,24 +27,24 @@ const Columns = ({ attributeKey, attributes, item }) => {
   };
 
   return (
-    <ColumnsWrapper>
+    <SelectNumberWrapper>
       <div className="attribute-name">{NAME[attributeKey]} : </div>
       <div className="attribute-value">
         <Select
-          name="columns"
+          name={NAME[attributeKey]}
           onChange={updateValue}
           options={OPTIONS(item.componentName)[attributeKey]}
-          placeholder="Select a number of columns"
+          placeholder="Select a number"
           value={value}
         />
       </div>
-    </ColumnsWrapper>
+    </SelectNumberWrapper>
   );
 };
 
-export default Columns;
+export default SelectNumber;
 
-const ColumnsWrapper = styled.div`
+const SelectNumberWrapper = styled.div`
   margin-bottom: 20px;
 
   .attribute-name {
