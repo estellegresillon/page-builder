@@ -48,6 +48,18 @@ const SectionWrapper = styled.div`
       width: 100% !important;
     }
   }
+
+  body#force-mobile & {
+    flex-wrap: nowrap;
+    flex-direction: ${({ $attributes }) =>
+      $attributes.reversed ? "column-reverse" : "column"};
+    height: auto;
+
+    img {
+      height: 400px;
+      width: 100% !important;
+    }
+  }
 `;
 
 const SectionContent = styled.div`
@@ -75,6 +87,16 @@ const SectionContent = styled.div`
   }
 
   @media screen and (max-width: 768px) {
+    h2 {
+      font-size: 36px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  }
+
+  body#force-mobile & {
     h2 {
       font-size: 36px;
     }

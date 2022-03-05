@@ -9,6 +9,8 @@ import {
   getDocumentFromLocalStorage,
 } from "utils/localStorage";
 
+import GoBackButton from "./GoBackButton";
+
 const Prod = () => {
   const components = getComponents();
   const [json, setJson] = useState([]);
@@ -34,6 +36,7 @@ const Prod = () => {
       ) : (
         <Empty text="Create your page in the builder." />
       )}
+      <GoBackButton />
     </ProdWrapper>
   );
 };

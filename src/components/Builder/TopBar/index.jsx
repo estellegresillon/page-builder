@@ -5,6 +5,7 @@ import styled from "styled-components";
 import IconClean from "components/common/IconClean";
 import IconSettings from "components/common/IconSettings";
 import IconSave from "components/common/IconSave";
+import MobilePreview from "components/common/MobilePreview";
 import Notification from "components/common/Notification";
 import ProjectModal from "components/common/ProjectModal";
 import { useBuilderContext } from "contexts";
@@ -14,6 +15,7 @@ const TopBar = () => {
   const { resetJson, json } = useBuilderContext();
   const [isSaved, setIsSaved] = useState(false);
   const [isCustomizeOpen, setCustomizeOpen] = useState(false);
+  const [isMobilePreviewOpen, setMobilePreviewOpen] = useState(false);
 
   const handleSaveDocument = () => {
     saveDocumentInLocalStorage(json);
@@ -41,8 +43,24 @@ const TopBar = () => {
             <span className="demo-tag">demo</span>
           </Link>
         </Item>
-        <Item onClick={() => handleSaveDocument()}>
-          <Link to="/prod">Live preview</Link>
+        <Item>
+          <span
+            onClick={() => setMobilePreviewOpen(true)}
+            className="mobile-link"
+          >
+            Mobile
+          </span>{" "}
+          /
+          <Link
+            onClick={() => handleSaveDocument()}
+            className="desktop-link"
+            to="/prod"
+          >
+            Live preview
+          </Link>
+          {isMobilePreviewOpen && (
+            <MobilePreview onClose={() => setMobilePreviewOpen(false)} />
+          )}
         </Item>
       </div>
       <div className="actions">
@@ -81,6 +99,18 @@ const TopBarWrapper = styled.div`
   position: relative;
   width: calc(100% - 40px);
   z-index: 2;
+
+  a.desktop-link {
+    margin: 0;
+    margin-left: 5px;
+  }
+
+  .mobile-link,
+  .desktop-link {
+    &:hover {
+      color: red;
+    }
+  }
 
   .demo-tag {
     background: #d40c0c;

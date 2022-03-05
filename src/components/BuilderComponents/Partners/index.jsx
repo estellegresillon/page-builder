@@ -37,6 +37,17 @@ const PartnersWrapper = styled.div`
       margin-top: 40px;
     }
   }
+
+  body#force-mobile & {
+    align-items: center;
+    flex-direction: column;
+    min-height: auto;
+    padding: 10%;
+
+    img {
+      margin-top: 40px;
+    }
+  }
 `;
 
 const ImageWrapper = styled.div`

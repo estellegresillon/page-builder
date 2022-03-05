@@ -13,7 +13,6 @@ const ProdMenu = () => {
       <div className="project-menu">
         <Item>Portfolio</Item>
         <Item>About</Item>
-        <Item>Contact</Item>
       </div>
     </ProdMenuWrapper>
   );
@@ -27,7 +26,7 @@ const ProdMenuWrapper = styled.div`
     $transparentMenu ? "transparent" : "white"};
   color: ${({ $transparentMenu }) => ($transparentMenu ? "white" : "black")};
   display: flex;
-  height: 100px;
+  height: 80px;
   justify-content: space-between;
   left: 0;
   padding: 0 30px;
@@ -44,6 +43,16 @@ const ProdMenuWrapper = styled.div`
 
   .project-menu {
     display: flex;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 0;
+    width: 100%;
+  }
+
+  body#force-mobile & {
+    padding: 0;
+    width: 100%;
   }
 `;
 

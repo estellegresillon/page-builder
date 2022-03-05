@@ -105,7 +105,18 @@ const GalleryWrapper = styled.div`
     }
   }
 
-  @media screen and (max-width: 768px) {
+  body#force-mobile & {
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+    img {
+      height: 50vh !important;
+      width: ${({ $attributes }) =>
+        $attributes.hasColGap ? "90%" : "100%"} !important;
+    }
+  }
+
+  @media screen and (max-width: 768px), {
     flex-wrap: nowrap;
     flex-direction: column;
 

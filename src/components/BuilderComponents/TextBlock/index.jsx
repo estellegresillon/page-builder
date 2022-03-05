@@ -60,4 +60,16 @@ const TextBlockContent = styled.div`
       font-size: 16px;
     }
   }
+
+  body#force-mobile & {
+    margin: 10%;
+
+    h2 {
+      font-size: 36px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  }
 `;
