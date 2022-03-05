@@ -3,11 +3,15 @@ import styled from "styled-components";
 import Divider from "components/common/Divider";
 import { getTextAlign } from "utils/helpers";
 
-const Section = ({ item, resizeRef }) => {
+const Section = ({ isInBuilder = false, item, resizeRef }) => {
   const { attributes } = item;
 
   return (
-    <SectionWrapper $attributes={attributes} id={item.id} ref={resizeRef}>
+    <SectionWrapper
+      $attributes={attributes}
+      $isInBuilder={isInBuilder}
+      ref={resizeRef}
+    >
       <SectionContent $attributes={attributes}>
         <h3>{attributes.title}</h3>
         <Divider color={attributes.textColor} />
@@ -27,8 +31,9 @@ const SectionWrapper = styled.div`
   display: flex;
   flex-direction: ${({ $attributes }) =>
     $attributes.reversed ? "row-reverse" : "row"};
-  margin: ${({ $attributes }) => ($attributes.hasSectionGap ? `5% 0` : "0")};
   height: 80vh;
+  margin: ${({ $attributes }) => ($attributes.hasSectionGap ? `5% 0` : "0")};
+  pointer-events: ${({ $isInBuilder }) => ($isInBuilder ? "none" : "")};
   width: 100%;
 
   img {

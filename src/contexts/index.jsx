@@ -20,7 +20,7 @@ const BuilderContext = createContext({
 export const BuilderProvider = ({ children, components = getComponents() }) => {
   const [json, setJson] = useState(getDocumentFromLocalStorage() || []);
   const [selectedComponent, setSelectedComponent] = useState(null);
-  const [draggedComponent, setDraggedComponent] = useState(null);
+  const [draggedOverComponent, setDraggedOverComponent] = useState(null);
   const [projectName, setProjectName] = useState(
     getDataFromLocalStorage("project") || "Project Name"
   );
@@ -76,7 +76,7 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
   const value = useMemo(
     () => ({
       components,
-      draggedComponent,
+      draggedOverComponent,
       json,
       projectFont,
       projectName,
@@ -84,7 +84,7 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       resetJson,
       selectComponent,
       selectedComponent,
-      setDraggedComponent,
+      setDraggedOverComponent,
       setProjectFont,
       setProjectName,
       setTransparentMenu,
@@ -94,7 +94,7 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
     }),
     [
       components,
-      draggedComponent,
+      draggedOverComponent,
       json,
       projectFont,
       projectName,
@@ -102,7 +102,7 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       resetJson,
       selectComponent,
       selectedComponent,
-      setDraggedComponent,
+      setDraggedOverComponent,
       setProjectFont,
       setProjectName,
       setTransparentMenu,

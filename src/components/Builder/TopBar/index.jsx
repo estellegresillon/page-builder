@@ -73,9 +73,7 @@ const TopBar = () => {
           Start over
         </Item>
       </div>
-      {isSaved && isMobilePreviewOpen && (
-        <Notification text="Successfully saved !" />
-      )}
+      {isSaved && <Notification text="Successfully saved !" />}
       {isMobilePreviewOpen && (
         <MobilePreview onClose={() => setMobilePreviewOpen(false)} />
       )}

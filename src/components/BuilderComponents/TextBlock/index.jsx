@@ -3,11 +3,15 @@ import styled from "styled-components";
 import Divider from "components/common/Divider";
 import { getTextAlign } from "utils/helpers";
 
-const TextBlock = ({ item, resizeRef }) => {
+const TextBlock = ({ isInBuilder = false, item, resizeRef }) => {
   const { attributes } = item;
 
   return (
-    <TextBlockWrapper $attributes={attributes} id={item.id} ref={resizeRef}>
+    <TextBlockWrapper
+      $attributes={attributes}
+      $isInBuilder={isInBuilder}
+      ref={resizeRef}
+    >
       <TextBlockContent $attributes={attributes}>
         <h2>{attributes.title}</h2>
         <Divider color={attributes.textColor} />
@@ -24,6 +28,7 @@ export default TextBlock;
 const TextBlockWrapper = styled.div`
   display: flex;
   min-height: ${({ $attributes }) => `${$attributes.height}px`};
+  pointer-events: ${({ $isInBuilder }) => ($isInBuilder ? "none" : "")};
   width: 100%;
 `;
 
@@ -41,7 +46,7 @@ const TextBlockContent = styled.div`
 
   h2 {
     font-size: 48px;
-    margin-bottom: 20px !important;
+    margin: 20px !important;
     width: 100%;
   }
 

@@ -2,11 +2,15 @@ import styled from "styled-components";
 
 const PARTNERS = Array.from({ length: 6 }, (_, i) => (i + 100).toString());
 
-const Partners = ({ item, resizeRef }) => {
+const Partners = ({ isInBuilder = false, item, resizeRef }) => {
   const { attributes } = item;
 
   return (
-    <PartnersWrapper $attributes={attributes} id={item.id} ref={resizeRef}>
+    <PartnersWrapper
+      $attributes={attributes}
+      $isInBuilder={isInBuilder}
+      ref={resizeRef}
+    >
       {PARTNERS.slice(0, attributes.itemCount).map((picture) => (
         <ImageWrapper key={picture} $attributes={attributes}>
           <img src={`builder/${picture}.png`} alt={picture} />
@@ -26,6 +30,7 @@ const PartnersWrapper = styled.div`
   justify-content: space-evenly;
   opacity: 0.3;
   padding: 0 10%;
+  pointer-events: ${({ $isInBuilder }) => ($isInBuilder ? "none" : "")};
   width: 80%;
 
   @media screen and (max-width: 768px) {

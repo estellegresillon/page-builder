@@ -10,7 +10,6 @@ const Hero = ({ isInBuilder = false, item, resizeRef }) => {
     <HeroWrapper
       $attributes={attributes}
       $isInBuilder={isInBuilder}
-      id={item.id}
       ref={resizeRef}
     >
       <div className="content" style={{ margin: "10%" }}>
@@ -38,6 +37,7 @@ const HeroWrapper = styled.div`
   height: ${({ $isInBuilder }) =>
     $isInBuilder ? "calc(100vh - 70px)" : "100vh"};
   justify-content: ${({ $attributes }) => $attributes.alignment.justifyContent};
+  pointer-events: ${({ $isInBuilder }) => ($isInBuilder ? "none" : "")};
   text-align: ${({ $attributes }) =>
     getTextAlign($attributes.alignment.alignItems)};
   width: 100%;

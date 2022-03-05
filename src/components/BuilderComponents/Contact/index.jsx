@@ -6,11 +6,15 @@ import IconLinkedIn from "components/common/IconLinkedIn";
 import IconMail from "components/common/IconMail";
 import IconWorld from "components/common/IconWorld";
 
-const Contact = ({ item, resizeRef }) => {
+const Contact = ({ isInBuilder = false, item, resizeRef }) => {
   const { attributes } = item;
 
   return (
-    <ContactWrapper $attributes={attributes} id={item.id} ref={resizeRef}>
+    <ContactWrapper
+      $attributes={attributes}
+      $isInBuilder={isInBuilder}
+      ref={resizeRef}
+    >
       <div className="photo-wrapper">
         <img src="builder/62.jpeg" alt="owner" />
       </div>
@@ -82,6 +86,7 @@ const ContactWrapper = styled.div`
   min-height: ${({ $attributes }) => `${$attributes.height}px`};
   justify-content: space-evenly;
   padding: 0 10%;
+  pointer-events: ${({ $isInBuilder }) => ($isInBuilder ? "none" : "")};
   text-align: center;
   width: 80%;
 

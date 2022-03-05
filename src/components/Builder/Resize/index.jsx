@@ -6,9 +6,9 @@ import { useBuilderContext } from "contexts";
 
 const Resize = ({ Children, $isSelected, item, onClick }) => {
   const {
-    draggedComponent,
+    draggedOverComponent,
     selectedComponent,
-    setDraggedComponent,
+    setDraggedOverComponent,
     updateAttributes,
   } = useBuilderContext();
   const [initialPos, setInitialPos] = useState(null);
@@ -44,7 +44,7 @@ const Resize = ({ Children, $isSelected, item, onClick }) => {
   const handleDragOver = (e) => {
     if (!selectedComponent) {
       const selectedItem = e.target;
-      setDraggedComponent(selectedItem.id);
+      setDraggedOverComponent(selectedItem.id);
     }
   };
 
@@ -60,9 +60,10 @@ const Resize = ({ Children, $isSelected, item, onClick }) => {
     <ResizeWrapper
       $isSelected={$isSelected}
       onClick={onClick}
+      id={item.id}
       onDragOver={(e) => handleDragOver(e)}
-      onDrop={() => setDraggedComponent(null)}
-      onDragLeave={() => setDraggedComponent(null)}
+      onDrop={() => setDraggedOverComponent(null)}
+      onDragLeave={() => setDraggedOverComponent(null)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -76,7 +77,7 @@ const Resize = ({ Children, $isSelected, item, onClick }) => {
           onDragEnd={onDragEnd}
         />
       )}
-      {draggedComponent === item.id && <PlaceholderWrapper />}
+      {draggedOverComponent === item.id && <PlaceholderWrapper />}
     </ResizeWrapper>
   );
 };

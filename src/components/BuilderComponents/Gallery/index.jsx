@@ -4,11 +4,15 @@ import { getItemHeight, getItemWidth } from "utils/helpers";
 
 const PICTURES = Array.from({ length: 16 }, (_, i) => (i + 1).toString());
 
-const Gallery = ({ item, resizeRef }) => {
+const Gallery = ({ isInBuilder = false, item, resizeRef }) => {
   const { attributes } = item;
 
   return (
-    <GalleryWrapper $attributes={attributes} id={item.id} ref={resizeRef}>
+    <GalleryWrapper
+      $attributes={attributes}
+      $isInBuilder={isInBuilder}
+      ref={resizeRef}
+    >
       {PICTURES.slice(0, attributes.itemCount).map((picture) => (
         <img
           className={`img-${attributes.columns}-col`}
@@ -31,6 +35,7 @@ const GalleryWrapper = styled.div`
   justify-content: flex-start;
   margin: ${({ $attributes }) =>
     $attributes.hasSectionGap ? `${$attributes.colGap}% 0` : "0"};
+  pointer-events: ${({ $isInBuilder }) => ($isInBuilder ? "none" : "")};
   width: 100%;
 
   img {
