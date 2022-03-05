@@ -26,7 +26,7 @@ const ProdMenuWrapper = styled.div`
     $transparentMenu ? "transparent" : "white"};
   color: ${({ $transparentMenu }) => ($transparentMenu ? "white" : "black")};
   display: flex;
-  height: 80px;
+  height: 90px;
   justify-content: space-between;
   left: 0;
   padding: 0 30px;
@@ -37,11 +37,12 @@ const ProdMenuWrapper = styled.div`
   z-index: 2;
 
   .project-logo {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bolder;
   }
 
   .project-menu {
+    font-size: 16px;
     display: flex;
   }
 

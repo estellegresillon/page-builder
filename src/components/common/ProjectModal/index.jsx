@@ -42,10 +42,8 @@ const Project = ({ onClose }) => {
   };
 
   const updateProjectName = (name) => {
-    if (name) {
-      saveDataInLocalStorage("project", name);
-      setProjectName(name);
-    }
+    saveDataInLocalStorage("project", name);
+    setProjectName(name);
   };
 
   const handleKeyDown = useCallback(
@@ -77,7 +75,7 @@ const Project = ({ onClose }) => {
           id="menu"
           onChange={updateTransparentMenu}
           type="checkbox"
-          checked={transparentMenu}
+          checked={transparentMenu === "true" || transparentMenu}
         />
       </div>
       <Select

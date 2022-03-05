@@ -43,7 +43,7 @@ const TopBar = () => {
             <span className="demo-tag">demo</span>
           </Link>
         </Item>
-        <Item>
+        <Item onClick={() => handleSaveDocument()}>
           <span
             onClick={() => setMobilePreviewOpen(true)}
             className="mobile-link"
@@ -51,16 +51,9 @@ const TopBar = () => {
             Mobile
           </span>{" "}
           /
-          <Link
-            onClick={() => handleSaveDocument()}
-            className="desktop-link"
-            to="/prod"
-          >
+          <Link className="desktop-link" to="/prod">
             Live preview
           </Link>
-          {isMobilePreviewOpen && (
-            <MobilePreview onClose={() => setMobilePreviewOpen(false)} />
-          )}
         </Item>
       </div>
       <div className="actions">
@@ -80,7 +73,12 @@ const TopBar = () => {
           Start over
         </Item>
       </div>
-      {isSaved && <Notification text="Successfully saved !" />}
+      {isSaved && isMobilePreviewOpen && (
+        <Notification text="Successfully saved !" />
+      )}
+      {isMobilePreviewOpen && (
+        <MobilePreview onClose={() => setMobilePreviewOpen(false)} />
+      )}
     </TopBarWrapper>
   );
 };
