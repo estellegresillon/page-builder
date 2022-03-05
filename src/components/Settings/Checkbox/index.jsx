@@ -24,8 +24,8 @@ const Checkbox = ({ attributeKey, attributes, item }) => {
         </label>
         <input
           id={NAME[attributeKey]}
-          onClick={updateValue}
-          type="radio"
+          onChange={updateValue}
+          type="checkbox"
           checked={attributes[attributeKey]}
         />
       </div>

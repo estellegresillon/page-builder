@@ -36,6 +36,18 @@ const SectionWrapper = styled.div`
     object-fit: cover;
     width: 50%;
   }
+
+  @media screen and (max-width: 768px) {
+    flex-wrap: nowrap;
+    flex-direction: ${({ $attributes }) =>
+      $attributes.reversed ? "column-reverse" : "column"};
+    height: auto;
+
+    img {
+      height: 400px;
+      width: 100% !important;
+    }
+  }
 `;
 
 const SectionContent = styled.div`
@@ -49,15 +61,26 @@ const SectionContent = styled.div`
   text-align: ${({ $attributes }) =>
     getTextAlign($attributes.alignment.alignItems)};
   width: 80%;
-  margin: 10%;
+  margin: 20% 10%;
 
   h3 {
     font-size: 36px;
+    margin: 0;
     margin-bottom: 20px !important;
-    width: 70%;
+    width: 80%;
   }
 
   p {
     font-size: 20px;
+  }
+
+  @media screen and (max-width: 768px) {
+    h2 {
+      font-size: 36px;
+    }
+
+    p {
+      font-size: 16px;
+    }
   }
 `;

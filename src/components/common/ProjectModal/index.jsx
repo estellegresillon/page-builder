@@ -20,14 +20,25 @@ const FONTS = [
 ];
 
 const Project = ({ onClose }) => {
-  const { projectFont, projectName, setProjectFont, setProjectName } =
-    useBuilderContext();
+  const {
+    transparentMenu,
+    projectFont,
+    projectName,
+    setTransparentMenu,
+    setProjectFont,
+    setProjectName,
+  } = useBuilderContext();
 
   const updateFont = (font) => {
     if (font) {
       saveDataInLocalStorage("font", font);
       setProjectFont(font);
     }
+  };
+
+  const updateTransparentMenu = () => {
+    saveDataInLocalStorage("transparentMenu", !transparentMenu);
+    setTransparentMenu(!transparentMenu);
   };
 
   const updateProjectName = (name) => {
@@ -58,6 +69,17 @@ const Project = ({ onClose }) => {
       <CloseButton onClick={onClose}>
         <IconClose />
       </CloseButton>
+      <div className="menu-style">
+        <label htmlFor="menu" name="menu">
+          Light Menu
+        </label>
+        <input
+          id="menu"
+          onChange={updateTransparentMenu}
+          type="checkbox"
+          checked={transparentMenu}
+        />
+      </div>
       <Select
         name="font"
         onChange={(e) => updateFont(e.target.value)}
@@ -90,6 +112,19 @@ const ProjectWrapper = styled.div`
   top: 60px;
   width: 250px;
   z-index: 1;
+
+  .menu-style {
+    cursor: pointer;
+    margin: 19px;
+    margin-top: 0;
+    white-space: nowrap;
+
+    input,
+    label {
+      cursor: pointer;
+      width: auto;
+    }
+  }
 
   svg {
     color: #365ed2;

@@ -27,6 +27,16 @@ const PartnersWrapper = styled.div`
   opacity: 0.3;
   padding: 0 10%;
   width: 80%;
+
+  @media screen and (max-width: 768px) {
+    align-items: center;
+    flex-direction: column;
+    padding: 10%;
+
+    img {
+      margin-top: 40px;
+    }
+  }
 `;
 
 const ImageWrapper = styled.div`

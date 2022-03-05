@@ -27,6 +27,9 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
   const [projectFont, setProjectFont] = useState(
     getDataFromLocalStorage("font") || "Gilroy"
   );
+  const [transparentMenu, setTransparentMenu] = useState(
+    getDataFromLocalStorage("transparentMenu") || true
+  );
 
   const selectComponent = useCallback((item) => {
     setSelectedComponent(item);
@@ -84,6 +87,8 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       setDraggedComponent,
       setProjectFont,
       setProjectName,
+      setTransparentMenu,
+      transparentMenu,
       updateAttributes,
       updateDocument,
     }),
@@ -100,6 +105,8 @@ export const BuilderProvider = ({ children, components = getComponents() }) => {
       setDraggedComponent,
       setProjectFont,
       setProjectName,
+      setTransparentMenu,
+      transparentMenu,
       updateAttributes,
       updateDocument,
     ]

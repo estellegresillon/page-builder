@@ -51,4 +51,10 @@ const HeroWrapper = styled.div`
     font-size: 20px;
     margin-bottom: 10px;
   }
+
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 48px;
+    }
+  }
 `;

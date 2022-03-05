@@ -42,10 +42,22 @@ const TextBlockContent = styled.div`
   h2 {
     font-size: 48px;
     margin-bottom: 20px !important;
-    width: 70%;
+    width: 100%;
   }
 
   p {
     font-size: 20px;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin: 10%;
+
+    h2 {
+      font-size: 36px;
+    }
+
+    p {
+      font-size: 16px;
+    }
   }
 `;

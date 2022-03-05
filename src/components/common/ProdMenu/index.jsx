@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { useBuilderContext } from "contexts";
 
 const ProdMenu = () => {
-  const { projectName } = useBuilderContext();
+  const { projectName, transparentMenu } = useBuilderContext();
+
   return (
-    <ProdMenuWrapper>
+    <ProdMenuWrapper $transparentMenu={transparentMenu}>
       <div className="project-logo">
         <Item>{projectName}</Item>
       </div>
@@ -22,8 +23,9 @@ export default ProdMenu;
 
 const ProdMenuWrapper = styled.div`
   align-items: center;
-  background-color: transparent;
-  color: white;
+  background-color: ${({ $transparentMenu }) =>
+    $transparentMenu ? "transparent" : "white"};
+  color: ${({ $transparentMenu }) => ($transparentMenu ? "white" : "black")};
   display: flex;
   height: 100px;
   justify-content: space-between;
