@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import Actions from './Actions';
 import { useBuilderContext } from 'contexts';
-import { IItem } from 'types/component';
+import { ChildrenProps, IItem } from 'types/component';
 
 type ResizeProps = {
-  Children: React.ComponentType;
+  Children: React.ComponentType<ChildrenProps>;
   $isSelected: boolean;
   item: IItem;
   onClick: () => void;
@@ -80,7 +80,6 @@ const Resize = ({ Children, $isSelected, item, onClick }: ResizeProps) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       {($isSelected || isHovered) && <Actions item={item} />}
-      {/* @ts-ignore */}
       <Children resizeRef={ref} isInBuilder item={item} />
       {isResizable && ($isSelected || isHovered) && (
         <Handler

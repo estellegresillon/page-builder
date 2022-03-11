@@ -1,21 +1,15 @@
 import styled from 'styled-components';
 
 import { getItemHeight, getItemWidth } from 'utils/helpers';
-import { IAttributes, IItem } from 'types/component';
+import { ChildrenProps, IAttributes } from 'types/component';
 
 const PICTURES = Array.from({ length: 16 }, (_, i) => (i + 1).toString());
-
-type GalleryProps = {
-  isInBuilder: boolean;
-  item: IItem;
-  resizeRef: React.MutableRefObject<HTMLDivElement>;
-};
 
 const Gallery = ({
   isInBuilder = false,
   item,
   resizeRef,
-}: GalleryProps): JSX.Element | null => {
+}: ChildrenProps): JSX.Element | null => {
   const { attributes } = item;
 
   if (!attributes?.itemCount) return null;

@@ -1,20 +1,14 @@
 import styled from 'styled-components';
 
-import { IAttributes, IItem } from 'types/component';
+import { ChildrenProps, IAttributes } from 'types/component';
 
 const PARTNERS = Array.from({ length: 6 }, (_, i) => (i + 100).toString());
-
-type PartnersProps = {
-  isInBuilder: boolean;
-  item: IItem;
-  resizeRef: React.MutableRefObject<HTMLDivElement>;
-};
 
 const Partners = ({
   isInBuilder = false,
   item,
   resizeRef,
-}: PartnersProps): JSX.Element | null => {
+}: ChildrenProps): JSX.Element | null => {
   const { attributes } = item;
 
   if (!attributes?.itemCount) return null;

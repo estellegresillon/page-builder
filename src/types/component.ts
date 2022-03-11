@@ -4,26 +4,45 @@ export interface IItem {
   id: string;
 }
 
+export type ChildrenProps = {
+  isInBuilder: boolean;
+  item: IItem;
+  resizeRef: React.MutableRefObject<HTMLDivElement> | null;
+};
+
+export type ComponentProps = React.ComponentType<ChildrenProps> & {
+  componentName: string;
+};
+
+export interface IAlignment {
+  alignItems: string;
+  justifyContent: string;
+}
+
 export interface IAttributes {
-  alignment?: { alignItems: string; justifyContent: string };
+  alignment?: IAlignment;
   buttonColor?: string;
   bgColor?: string;
   colGap?: string;
   columns?: string;
   description?: string;
+  dribbble?: string;
+  instagram?: string;
   itemCount?: string;
   hasColGap?: boolean;
   hasSectionGap?: boolean;
   height?: string;
+  linkedIn?: string;
+  mail?: string;
+  other?: string;
   resizable?: boolean;
   reversed?: boolean;
   subtitle?: string;
   textColor?: string;
   title?: string;
-  mail?: string;
-  linkedIn: string;
-  instagram: string;
-  dribbble: string;
-  other: string;
-  [key: string]: any;
+  [attributeKey: string]: string | boolean | IAlignment | undefined;
 }
+
+// export type IAttributes = {
+//   [attributeKey: string]: string | boolean | IAlignment;
+// };

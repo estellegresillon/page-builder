@@ -5,19 +5,13 @@ import IconInstagram from 'components/common/IconInstagram';
 import IconLinkedIn from 'components/common/IconLinkedIn';
 import IconMail from 'components/common/IconMail';
 import IconWorld from 'components/common/IconWorld';
-import { IAttributes, IItem } from 'types/component';
-
-type ContactProps = {
-  isInBuilder: boolean;
-  item: IItem;
-  resizeRef: React.MutableRefObject<HTMLDivElement>;
-};
+import { ChildrenProps, IAttributes } from 'types/component';
 
 const Contact = ({
   isInBuilder = false,
   item,
   resizeRef,
-}: ContactProps): JSX.Element => {
+}: ChildrenProps): JSX.Element => {
   const { attributes } = item;
 
   return (

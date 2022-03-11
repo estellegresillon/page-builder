@@ -1,22 +1,19 @@
 import { cloneDeep } from 'lodash';
 import { v4 as uuid } from 'uuid';
 
-export const traverseItem = (item: any, updater: any) => {
-  const traverse = (item: any) => {
+import { IItem } from 'types/component';
+
+export const traverseItem = (item: IItem, updater: (item: IItem) => void) => {
+  const traverse = (item: IItem) => {
     updater(item);
-
-    if (item.children) {
-      item.children = item.children.filter(Boolean).map(traverse);
-    }
-
     return item;
   };
 
   return traverse(item);
 };
 
-export const createNewItem = (item: any) =>
-  traverseItem(cloneDeep(item), (item: any) => (item.id = uuid()));
+export const createNewItem = (item: IItem) =>
+  traverseItem(cloneDeep(item), (item: IItem) => (item.id = uuid()));
 
 export const getTextAlign = (alignment?: string) => {
   if (!alignment) return;

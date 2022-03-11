@@ -11,8 +11,9 @@ type TextProps = {
 };
 
 const Text = ({ attributeKey, item }: TextProps): JSX.Element => {
+  const stringAttribute = item.attributes[attributeKey] as string;
   const { updateAttributes } = useBuilderContext();
-  const [textValue, setTextValue] = useState(item.attributes[attributeKey]);
+  const [textValue, setTextValue] = useState<string>(stringAttribute);
 
   const updateText = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTextValue = e.target.value;
@@ -29,7 +30,7 @@ const Text = ({ attributeKey, item }: TextProps): JSX.Element => {
           name={attributeKey}
           onChange={updateText}
           placeholder={`Enter a ${attributeKey}`}
-          value={item.attributes[attributeKey] || textValue}
+          value={stringAttribute || textValue}
         />
       </div>
     </TextWrapper>

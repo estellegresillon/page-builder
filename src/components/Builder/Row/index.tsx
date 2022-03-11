@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
-import { IItem } from 'types/component';
+import { ChildrenProps, IItem } from 'types/component';
 
 import ItemList from './ItemList';
 
 export type RowProps = {
-  Component: React.ComponentType;
-  components: IItem[];
+  Component: React.ComponentType<ChildrenProps>;
+  components: { [name: string]: React.ComponentType<ChildrenProps> };
   handleClick: () => void;
   index: number;
   section: IItem;

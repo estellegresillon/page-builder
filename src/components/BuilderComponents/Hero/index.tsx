@@ -2,19 +2,13 @@ import styled from 'styled-components';
 
 import Button from 'components/common/Button';
 import { getTextAlign } from 'utils/helpers';
-import { IAttributes, IItem } from 'types/component';
-
-type HeroProps = {
-  isInBuilder: boolean;
-  item: IItem;
-  resizeRef: React.MutableRefObject<HTMLDivElement>;
-};
+import { ChildrenProps, IAttributes } from 'types/component';
 
 const Hero = ({
   isInBuilder = false,
   item,
   resizeRef,
-}: HeroProps): JSX.Element => {
+}: ChildrenProps): JSX.Element => {
   const { attributes } = item;
 
   return (

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 
 import Empty from 'components/common/Empty';
@@ -25,7 +25,7 @@ const Builder = (): JSX.Element => {
 
   const [sections, moveSections] = useState<IItem[]>([]);
 
-  const handleOnDragEnd = (result: any) => {
+  const handleOnDragEnd = (result: DropResult) => {
     if (!result.destination) {
       return;
     }
@@ -49,7 +49,6 @@ const Builder = (): JSX.Element => {
     event.preventDefault();
 
     const componentName = event.dataTransfer.getData('builder/name');
-    // @ts-ignore
     const attributes = initialAttributes[componentName];
 
     if (!componentName) {
@@ -61,9 +60,9 @@ const Builder = (): JSX.Element => {
     const index = items.findIndex((section) => section.id === dropEl.id);
 
     const newChild = createNewItem({
-      componentName,
       attributes,
-      children: [],
+      componentName,
+      id: '',
     });
 
     if (index >= 0) {
@@ -103,7 +102,6 @@ const Builder = (): JSX.Element => {
                         return null;
                       }
 
-                      // @ts-ignore
                       const Component = components[section.componentName];
 
                       return (

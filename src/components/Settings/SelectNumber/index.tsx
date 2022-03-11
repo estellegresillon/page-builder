@@ -10,7 +10,7 @@ const NAME: { [key: string]: string } = {
   itemCount: 'number of items',
 };
 
-const OPTIONS: any = (component: string) => ({
+const OPTIONS = (component: string): { [key: string]: string[] } => ({
   columns: Array.from({ length: 4 }, (_, i) => (i + 1).toString()),
   itemCount: Array.from({ length: component === 'Partners' ? 6 : 16 }, (_, i) =>
     (i + 1).toString(),
@@ -27,7 +27,9 @@ const SelectNumber = ({
   item,
 }: SelectNumberProps): JSX.Element => {
   const { updateAttributes } = useBuilderContext();
-  const [value, setValue] = useState<string>(item.attributes[attributeKey]);
+  const [value, setValue] = useState<string>(
+    item.attributes[attributeKey] as string,
+  );
 
   const updateValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newValue = e.target.value;

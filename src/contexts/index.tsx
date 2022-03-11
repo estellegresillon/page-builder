@@ -8,14 +8,14 @@ import {
   useState,
 } from 'react';
 
-import { IItem } from 'types/component';
+import { ComponentProps, IAttributes, IItem } from 'types/component';
 import {
   getDataFromLocalStorage,
   getDocumentFromLocalStorage,
 } from 'utils/localStorage';
 
 type ContextProps = {
-  components: IItem[];
+  components: { [name: string]: ComponentProps };
   draggedOverComponent: string;
   json: [];
   projectFont: string;
@@ -29,12 +29,12 @@ type ContextProps = {
   setProjectName: Dispatch<SetStateAction<string>>;
   setTransparentMenu: Dispatch<SetStateAction<string>>;
   transparentMenu: string;
-  updateAttributes: (sectionId: string, attributes: any) => void;
+  updateAttributes: (sectionId: string, attributes: IAttributes) => void;
   updateDocument: (json: IItem[]) => void;
 };
 
 const BuilderContext = createContext<ContextProps>({
-  components: [],
+  components: {},
   draggedOverComponent: '',
   json: [],
   projectFont: '',
@@ -54,7 +54,9 @@ const BuilderContext = createContext<ContextProps>({
 
 type ProviderProps = {
   children: React.ReactElement;
-  components: any;
+  components: {
+    [name: string]: ComponentProps;
+  };
 };
 
 export const BuilderProvider = ({

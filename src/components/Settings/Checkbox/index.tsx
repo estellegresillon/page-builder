@@ -30,7 +30,7 @@ const Checkbox = ({ attributeKey, item }: CheckBoxProps): JSX.Element => {
           id={NAME[attributeKey]}
           onChange={updateValue}
           type="checkbox"
-          checked={item.attributes[attributeKey]}
+          checked={item.attributes[attributeKey] as boolean}
         />
       </div>
     </CheckboxWrapper>

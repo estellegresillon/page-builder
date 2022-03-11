@@ -2,19 +2,13 @@ import styled from 'styled-components';
 
 import Divider from 'components/common/Divider';
 import { getTextAlign } from 'utils/helpers';
-import { IAttributes, IItem } from 'types/component';
-
-type SectionProps = {
-  isInBuilder: boolean;
-  item: IItem;
-  resizeRef: React.MutableRefObject<HTMLDivElement>;
-};
+import { ChildrenProps, IAttributes } from 'types/component';
 
 const Section = ({
   isInBuilder = false,
   item,
   resizeRef,
-}: SectionProps): JSX.Element => {
+}: ChildrenProps): JSX.Element => {
   const { attributes } = item;
 
   return (

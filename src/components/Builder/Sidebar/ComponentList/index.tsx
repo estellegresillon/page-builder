@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 import { useBuilderContext } from 'contexts';
-import { IItem } from 'types/component';
+import { ComponentProps } from 'types/component';
 
 const ComponentList = () => {
   const { components } = useBuilderContext();
 
   const onDragStart = (
     event: React.DragEvent<HTMLDivElement>,
-    component: IItem,
+    component: ComponentProps,
   ) => {
     if (event?.dataTransfer) {
       event.dataTransfer.setData('builder/name', component.componentName);
@@ -23,7 +23,6 @@ const ComponentList = () => {
         <Item
           draggable
           key={component}
-          // @ts-ignore
           onDragStart={(e) => onDragStart(e, components[component])}
         >
           {component}

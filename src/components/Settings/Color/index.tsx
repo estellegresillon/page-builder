@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { ChromePicker } from 'react-color';
+import { ChromePicker, ColorResult } from 'react-color';
 import styled from 'styled-components';
 
 import { useBuilderContext } from 'contexts';
@@ -23,7 +23,7 @@ const Color = ({ attributeKey, item }: ColorProps): JSX.Element => {
   const [isPickerOpen, setPickerOpen] = useState(false);
   useOnClickOutside(ref, () => setPickerOpen(false));
 
-  const updateColor = (newColor: any) => {
+  const updateColor = (newColor: ColorResult) => {
     updateAttributes(item.id, { [attributeKey]: newColor.hex });
   };
 
@@ -32,13 +32,13 @@ const Color = ({ attributeKey, item }: ColorProps): JSX.Element => {
       <div className="attribute-name">{NAME[attributeKey]} :</div>
       <div className="attribute-value">
         <ColorButton
-          $color={item.attributes[attributeKey]}
+          $color={item.attributes[attributeKey] as string}
           onClick={() => setPickerOpen(true)}
         />
         {isPickerOpen && (
           <PickerWrapper ref={ref}>
             <ChromePicker
-              color={item.attributes[attributeKey]}
+              color={item.attributes[attributeKey] as string}
               onChangeComplete={updateColor}
             />
           </PickerWrapper>

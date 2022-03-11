@@ -1,4 +1,6 @@
-export const initialAttributes = {
+import { IAttributes } from 'types/component';
+
+export const initialAttributes: { [key: string]: IAttributes } = {
   Contact: {
     title: 'Contact',
     description:

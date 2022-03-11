@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Empty from 'components/common/Empty';
@@ -10,10 +10,10 @@ import {
 } from 'utils/localStorage';
 
 import GoBackButton from './GoBackButton';
-import { IItem } from 'types/component';
+import { ComponentProps, IItem } from 'types/component';
 
 const Prod = () => {
-  const components = getComponents();
+  const components: { [name: string]: ComponentProps } = getComponents();
   const [json, setJson] = useState([]);
 
   useEffect(() => {
@@ -32,10 +32,16 @@ const Prod = () => {
             return null;
           }
 
-          // @ts-ignore
           const Section = components[mappedSection.componentName];
 
-          return <Section item={section} key={mappedSection.id} />;
+          return (
+            <Section
+              isInBuilder={false}
+              item={mappedSection}
+              key={mappedSection.id}
+              resizeRef={null}
+            />
+          );
         })
       ) : (
         <Empty text="Create your page in the builder." />
